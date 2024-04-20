@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://blpuiro8pnb6p"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/CanShoot.cs" id="1_yilka"]
+
+[node name="CanShoot" type="Node2D"]
+script = ExtResource("1_yilka")
+
+[node name="Timer" type="Timer" parent="."]

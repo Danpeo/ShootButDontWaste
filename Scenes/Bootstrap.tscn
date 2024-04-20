@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuy5v5xj0b1r1"]
+
+[ext_resource type="Script" path="res://Scripts/Bootstrap.cs" id="1_3tsqn"]
+
+[node name="Bootstrap" type="Node"]
+script = ExtResource("1_3tsqn")

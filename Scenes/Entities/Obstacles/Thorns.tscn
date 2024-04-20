@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://ccjotbukj4im4"]
+
+[ext_resource type="Script" path="res://Scripts/Properties/CanDamageOnTouch.cs" id="1_hdjqv"]
+[ext_resource type="Texture2D" uid="uid://o2ax0nu7eose" path="res://GameAssets/Paper-Pixels-8x8/thorns.png" id="2_d5lnn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6w5c"]
+size = Vector2(8, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_moas6"]
+size = Vector2(8, 2)
+
+[node name="Thorns" type="Area2D"]
+script = ExtResource("1_hdjqv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_e6w5c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_d5lnn")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_moas6")
