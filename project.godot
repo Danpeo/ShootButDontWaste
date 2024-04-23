@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/Bootstrap.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+FrameFreeze="*res://Scripts/Effects/FrameFreeze.cs"
+
 [display]
 
 window/size/viewport_width=384
@@ -27,6 +31,10 @@ window/stretch/mode="canvas_items"
 [dotnet]
 
 project/assembly_name="Platformer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 

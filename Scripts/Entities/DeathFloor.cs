@@ -11,8 +11,8 @@ public partial class DeathFloor : Area2D
         {
             if (body is Player player)
             {
-                Health playerHealth = player.Health;
-                playerHealth.Current = 0;
+                Ammo playerAmmo = player.Ammo;
+                playerAmmo.Current = 0;
             }
         };
     }

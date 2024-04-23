@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://dmbk8m77psx8i"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/Ammos/SingleCollectButton.cs" id="1_oeqp6"]
+[ext_resource type="Texture2D" uid="uid://d2dqvglu8kqjp" path="res://GameAssets/Collectables/SingleCollectButton/singlecolbutt1.png" id="2_mag5a"]
+[ext_resource type="Texture2D" uid="uid://du1i8yvn7mmjf" path="res://GameAssets/Collectables/SingleCollectButton/singlecolbutt2.png" id="3_u8wl7"]
+[ext_resource type="Texture2D" uid="uid://dilkyy2a1juw7" path="res://GameAssets/Collectables/SingleCollectButton/singlecolbutt3.png" id="4_00oue"]
+[ext_resource type="Texture2D" uid="uid://dfyaa8upchdl6" path="res://GameAssets/Collectables/SingleCollectButton/singlecolbutt4.png" id="5_bjd1m"]
+[ext_resource type="Texture2D" uid="uid://b66atkpyqic6a" path="res://GameAssets/Collectables/SingleCollectButton/singlecolbutt5.png" id="6_5pda8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4icie"]
+size = Vector2(2, 2)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tqxk4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_mag5a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_u8wl7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_00oue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bjd1m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_5pda8")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 8.0
+}]
+
+[node name="SingleCollectButton" type="Area2D"]
+script = ExtResource("1_oeqp6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_4icie")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_tqxk4")
+animation = &"Default"
+frame_progress = 0.0126489

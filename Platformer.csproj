@@ -5,4 +5,15 @@
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Chickensoft.AutoInject" Version="1.5.0" />
+    <PackageReference Include="Chickensoft.SuperNodes" Version="1.7.0" />
+    <PackageReference Include="Chickensoft.SuperNodes.Types" Version="1.7.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="DVar.GodotSharp.Extensions\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="DVar.GodotSharp.Extensions\**" />
+  </ItemGroup>
 </Project>

@@ -1,0 +1,113 @@
+[gd_scene load_steps=21 format=3 uid="uid://bpr334qcbkpmv"]
+
+[ext_resource type="Texture2D" uid="uid://ketd5x3o8xpd" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_80.png" id="1_oabyv"]
+[ext_resource type="Texture2D" uid="uid://bfqktdif3u43" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_15.png" id="2_8kt3n"]
+[ext_resource type="Texture2D" uid="uid://cuh24s7rjwmis" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_48.png" id="2_u4kvj"]
+[ext_resource type="Texture2D" uid="uid://nvj7ww2qgjl" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_49.png" id="3_f5ey6"]
+[ext_resource type="Texture2D" uid="uid://cr1pgoru1xmb5" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_50.png" id="4_fd4fh"]
+[ext_resource type="Texture2D" uid="uid://bykb2ml7ssit6" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_51.png" id="5_1p18w"]
+[ext_resource type="Texture2D" uid="uid://drfrdx6fvuxv8" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_62.png" id="6_x6x1d"]
+[ext_resource type="Texture2D" uid="uid://db1koagw8q02b" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_63.png" id="7_diptn"]
+[ext_resource type="Texture2D" uid="uid://wabbrf03o13e" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_64.png" id="8_v3hix"]
+[ext_resource type="Texture2D" uid="uid://deje7q1ihy5jq" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_65.png" id="9_x840p"]
+[ext_resource type="Texture2D" uid="uid://fy7e7kbiyq1m" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_02.png" id="10_k0w6i"]
+[ext_resource type="Texture2D" uid="uid://do63hekxkhlh5" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_03.png" id="11_ve22g"]
+[ext_resource type="Texture2D" uid="uid://csvgc8ejipo4e" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_04.png" id="12_adnfc"]
+[ext_resource type="Texture2D" uid="uid://xxhvkoy4d5ro" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_05.png" id="13_noog6"]
+[ext_resource type="Texture2D" uid="uid://cp8sclhgmu7ne" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_06.png" id="14_1sm3m"]
+[ext_resource type="Texture2D" uid="uid://b743valcnj4f8" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_07.png" id="15_kslkp"]
+[ext_resource type="Texture2D" uid="uid://bw0unwe5yfgqy" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_08.png" id="16_5te8b"]
+[ext_resource type="Texture2D" uid="uid://dn1bi1pddq4f6" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_09.png" id="17_chshv"]
+[ext_resource type="Script" path="res://Scripts/Animation/PlayerAnimator.cs" id="18_b4edo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eaimv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_oabyv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8kt3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_oabyv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8kt3n")
+}],
+"loop": true,
+"name": &"Hit",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_u4kvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_f5ey6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fd4fh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_1p18w")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_x6x1d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_diptn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_v3hix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_x840p")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_k0w6i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ve22g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_adnfc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_noog6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_1sm3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_kslkp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_5te8b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_chshv")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 16.0
+}]
+
+[node name="PlayerAnimatedSprite" type="AnimatedSprite2D"]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_eaimv")
+animation = &"Hit"
+script = ExtResource("18_b4edo")
+
+[node name="HitTimer" type="Timer" parent="."]
+wait_time = 0.25

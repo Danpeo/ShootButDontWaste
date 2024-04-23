@@ -1,94 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://caiipt70dcaui"]
+[gd_scene load_steps=7 format=3 uid="uid://caiipt70dcaui"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player.cs" id="1_dqshf"]
-[ext_resource type="Texture2D" uid="uid://fy7e7kbiyq1m" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_02.png" id="1_nvi00"]
-[ext_resource type="Texture2D" uid="uid://cuh24s7rjwmis" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_48.png" id="2_b22bn"]
-[ext_resource type="Texture2D" uid="uid://do63hekxkhlh5" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_03.png" id="2_s384x"]
-[ext_resource type="Texture2D" uid="uid://csvgc8ejipo4e" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_04.png" id="3_2cqfp"]
-[ext_resource type="Texture2D" uid="uid://nvj7ww2qgjl" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_49.png" id="3_6nsrx"]
-[ext_resource type="Texture2D" uid="uid://cr1pgoru1xmb5" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_50.png" id="4_577lx"]
-[ext_resource type="Texture2D" uid="uid://xxhvkoy4d5ro" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_05.png" id="4_mb6sj"]
-[ext_resource type="Texture2D" uid="uid://cp8sclhgmu7ne" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_06.png" id="5_0ea2o"]
-[ext_resource type="Texture2D" uid="uid://bykb2ml7ssit6" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_51.png" id="5_vm2fg"]
-[ext_resource type="Texture2D" uid="uid://b743valcnj4f8" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_07.png" id="6_a0cq6"]
-[ext_resource type="Texture2D" uid="uid://drfrdx6fvuxv8" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_62.png" id="6_bse07"]
-[ext_resource type="Texture2D" uid="uid://db1koagw8q02b" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_63.png" id="7_3ursh"]
-[ext_resource type="Texture2D" uid="uid://bw0unwe5yfgqy" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_08.png" id="7_e6l16"]
-[ext_resource type="Texture2D" uid="uid://dn1bi1pddq4f6" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_09.png" id="8_joo7n"]
-[ext_resource type="Texture2D" uid="uid://wabbrf03o13e" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_64.png" id="8_ws1mw"]
-[ext_resource type="Texture2D" uid="uid://deje7q1ihy5jq" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_65.png" id="9_gfnek"]
-[ext_resource type="Script" path="res://Scripts/Animation/PlayerAnimator.cs" id="10_3p3um"]
-[ext_resource type="PackedScene" uid="uid://bl77r6l1d24rk" path="res://Scenes/Properties/Health.tscn" id="10_betxr"]
+[ext_resource type="PackedScene" uid="uid://bpr334qcbkpmv" path="res://Scenes/Animators/PlayerAnimatedSprite.tscn" id="4_0x5pd"]
+[ext_resource type="Script" path="res://Scripts/Entities/PlayerInput.cs" id="5_op48i"]
+[ext_resource type="PackedScene" uid="uid://bl77r6l1d24rk" path="res://Scenes/Properties/Ammo.tscn" id="19_d6fbc"]
 [ext_resource type="PackedScene" uid="uid://blpuiro8pnb6p" path="res://Scenes/Entities/CanShoot.tscn" id="20_kqwes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ir0dh"]
 size = Vector2(5, 7)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_mg63s"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_b22bn")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_6nsrx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_577lx")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_vm2fg")
-}],
-"loop": true,
-"name": &"Idle",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("6_bse07")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_3ursh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_ws1mw")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_gfnek")
-}],
-"loop": true,
-"name": &"Jump",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_nvi00")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_s384x")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_2cqfp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_mb6sj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_0ea2o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_a0cq6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_e6l16")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_joo7n")
-}],
-"loop": true,
-"name": &"Run",
-"speed": 16.0
-}]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_dqshf")
@@ -98,13 +17,7 @@ Speed = 100.0
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_ir0dh")
 
-[node name="PlayerAnimatedSprite" type="AnimatedSprite2D" parent="."]
-unique_name_in_owner = true
-sprite_frames = SubResource("SpriteFrames_mg63s")
-animation = &"Jump"
-script = ExtResource("10_3p3um")
-
-[node name="Health" parent="." instance=ExtResource("10_betxr")]
+[node name="PlayerAmmo" parent="." instance=ExtResource("19_d6fbc")]
 unique_name_in_owner = true
 
 [node name="PlayerCanShoot" parent="." instance=ExtResource("20_kqwes")]
@@ -114,3 +27,8 @@ WeaponSceneName = "PlayerGun"
 [node name="PlayerGun" type="Node2D" parent="PlayerCanShoot"]
 unique_name_in_owner = true
 position = Vector2(5, 1)
+
+[node name="PlayerAnimatedSprite" parent="." instance=ExtResource("4_0x5pd")]
+
+[node name="PlayerInput" type="Node" parent="."]
+script = ExtResource("5_op48i")

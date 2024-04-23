@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bl77r6l1d24rk"]
+
+[ext_resource type="Script" path="res://Scripts/Properties/Ammo.cs" id="1_ttfd5"]
+
+[node name="Ammo" type="Node"]
+script = ExtResource("1_ttfd5")

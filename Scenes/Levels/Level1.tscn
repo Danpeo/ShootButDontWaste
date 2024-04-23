@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://fwngd5v0ht4k"]
+[gd_scene load_steps=14 format=3 uid="uid://fwngd5v0ht4k"]
 
 [ext_resource type="Texture2D" uid="uid://7lbbt0ltjg6m" path="res://GameAssets/Paper-Pixels-8x8/with-background/Tiles.png" id="1_vn1rn"]
 [ext_resource type="Texture2D" uid="uid://o2ax0nu7eose" path="res://GameAssets/Paper-Pixels-8x8/thorns.png" id="2_y054l"]
 [ext_resource type="PackedScene" uid="uid://caiipt70dcaui" path="res://Scenes/Entities/Player.tscn" id="2_y573l"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_ac8me"]
 [ext_resource type="PackedScene" uid="uid://ccjotbukj4im4" path="res://Scenes/Entities/Obstacles/Thorns.tscn" id="4_jesiq"]
 [ext_resource type="Script" path="res://Scripts/Entities/DeathFloor.cs" id="5_ei0sc"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="5_tdhx2"]
+[ext_resource type="PackedScene" uid="uid://dmbk8m77psx8i" path="res://Scenes/Entities/Ammo/SingleCollectButton.tscn" id="8_nqc7w"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f3aki"]
 
@@ -4364,14 +4367,43 @@ layer_0/tile_data = PackedInt32Array(-1769510, 0, 0, -1703974, 0, 0, -1638438, 0
 layer_1/name = "Objects"
 layer_1/tile_data = PackedInt32Array()
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(26, 132)
+offset = Vector2(50, 0)
+zoom = Vector2(1.3, 1.3)
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("3_ac8me")
+
+[node name="PhantomCamera2D" type="Node2D" parent="."]
+position = Vector2(26, 132)
+script = ExtResource("5_tdhx2")
+priority_override = false
+priority = 0
+zoom = Vector2(1.3, 1.3)
+follow_mode = 5
+follow_target = NodePath("../Player")
+follow_parameters/target_offset = Vector2(0, 0)
+follow_parameters/damping = true
+follow_parameters/damping_value = 10.0
+follow_parameters/dead_zone_horizontal = 0.2
+follow_parameters/dead_zone_vertical = 0.2
+follow_parameters/viewfinder_in_play = false
+frame_preview = true
+pixel_perfect = false
+limit/draw_limits = true
+limit/left = -10000000
+limit/top = -10000000
+limit/right = 10000000
+limit/bottom = 10000000
+limit/limit_node_target = NodePath("")
+limit/smoothed = true
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+
 [node name="Player" parent="." instance=ExtResource("2_y573l")]
 position = Vector2(26, 132)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(-15, -25)
-offset = Vector2(50, 0)
-zoom = Vector2(1.5, 1.5)
-position_smoothing_enabled = true
 
 [node name="Thorns" parent="." instance=ExtResource("4_jesiq")]
 position = Vector2(129, 132)
@@ -4382,3 +4414,12 @@ script = ExtResource("5_ei0sc")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathFloor"]
 position = Vector2(592, 286.5)
 shape = SubResource("RectangleShape2D_xpyk0")
+
+[node name="SingleCollectButton" parent="." instance=ExtResource("8_nqc7w")]
+position = Vector2(63, 133)
+
+[node name="SingleCollectButton2" parent="." instance=ExtResource("8_nqc7w")]
+position = Vector2(68, 133)
+
+[node name="SingleCollectButton3" parent="." instance=ExtResource("8_nqc7w")]
+position = Vector2(73, 133)

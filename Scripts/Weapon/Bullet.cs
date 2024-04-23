@@ -5,6 +5,7 @@ namespace Platformer.Scripts.Weapon;
 public partial class Bullet : CharacterBody2D
 {
     [Export] public float Speed { get; set; } = 50;
+    [Export] public int BulletCountAsOneShot { get; set; } = 1;
     
     public void Construct(Vector2 position, float direction)
     {

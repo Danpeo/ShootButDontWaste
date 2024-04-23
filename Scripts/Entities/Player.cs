@@ -1,6 +1,4 @@
-using System.Diagnostics;
 using Godot;
-using Platformer.Scripts.Animation;
 using Platformer.Scripts.Properties;
 using Platformer.Scripts.Utils;
 
@@ -10,9 +8,10 @@ public partial class Player : CharacterBody2D
 {
     [Export] public float Speed { get; set; } = 250;
     [Export] public float JumpSpeed { get; set; } = -300;
-    public Health Health { get; set; }
+    public float Direction { get; set; }
+    public bool Jumped { get; set; }
+    public Ammo Ammo { get; set; }
     private float _gravity = ProjectSettings.GetSetting(SettingConstant.Gravity).AsSingle();
-    private PlayerAnimator _animatedSprite;
     private CanShoot _canShoot;
     private bool _flipOrientation;
 
@@ -31,34 +30,33 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
-        Health = GetNode<Health>("%Health");
-        _animatedSprite = GetNode<PlayerAnimator>("%PlayerAnimatedSprite");
+        Ammo = GetNode<Ammo>("%PlayerAmmo");
         _canShoot = GetNode<CanShoot>("%PlayerCanShoot");
+        _canShoot.OnShooted += shots => Ammo.ReduceByShooting(shots);
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        Debug.Print(Health.Current + "HEALTH");
+        /*
+        Debug.Print(Ammo.Current + "AMMO");
+        */
         Vector2 currVelocity = Velocity;
         currVelocity.Y += _gravity * (float)delta;
 
-        if (Input.IsActionJustPressed("Jump") && IsOnFloor())
+        if (Jumped)
+        {
             currVelocity.Y = JumpSpeed;
+            Jumped = false;
+        }
 
-        float direction = Input.GetAxis("MoveLeft", "MoveRight");
-        currVelocity.X = direction * Speed;
-
-        _animatedSprite.PlayAnimation(currVelocity);
+        currVelocity.X = Direction * Speed;
 
         DefineOrientation(currVelocity);
         Velocity = currVelocity;
         MoveAndSlide();
-
-        if (InputExt.IsActionHolding("Shoot"))
-        {
-            _canShoot.Shoot(Rotation);
-        }
     }
+
+    public void Shoot() => _canShoot.Shoot(Rotation, Ammo.Current);
 
     private void DefineOrientation(Vector2 velocity)
     {
