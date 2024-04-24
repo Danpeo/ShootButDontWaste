@@ -1,4 +1,5 @@
 using Godot;
+using Platformer.Scripts.Entities.Enemies;
 
 namespace Platformer.Scripts.Weapon;
 
@@ -13,18 +14,24 @@ public partial class Bullet : CharacterBody2D
         Position = position;
         Velocity = new Vector2(Speed, 0).Rotated(Rotation);
     }
-    
+
     public override void _PhysicsProcess(double delta)
     {
-        var collision = MoveAndCollide(Velocity * (float)delta);
-        /*if (collision != null)
+        KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
+        if (collision != null)
         {
-            Velocity = Velocity.Bounce(collision.GetNormal());
+            if (collision.GetCollider() is IEnemy)
+            {
+                
+                QueueFree();                
+            }
+            
+            /*Velocity = Velocity.Bounce(collision.GetNormal());
             if (collision.GetCollider().HasMethod("Hit"))
             {
                 collision.GetCollider().Call("Hit");
-            }
-        }*/
+            }*/
+        }
     }
     
     private void OnVisibilityNotifier2DScreenExited() => QueueFree();

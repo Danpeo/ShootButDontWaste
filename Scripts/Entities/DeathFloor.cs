@@ -12,7 +12,7 @@ public partial class DeathFloor : Area2D
             if (body is Player player)
             {
                 Ammo playerAmmo = player.Ammo;
-                playerAmmo.Current = 0;
+                playerAmmo.Current = -1;
             }
         };
     }

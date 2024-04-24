@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn408dw7xw58d"]
+
+[ext_resource type="Script" path="res://Scripts/Properties/ParentCanDamageOnTouch.cs" id="1_ol4dr"]
+
+[node name="DamagesOnTouch" type="Node"]
+script = ExtResource("1_ol4dr")

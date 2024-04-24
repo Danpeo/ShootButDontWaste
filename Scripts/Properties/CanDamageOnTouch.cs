@@ -13,8 +13,7 @@ public partial class CanDamageOnTouch : Area2D
 		{
 			if (body is Player player)
 			{
-				Ammo playerAmmo = player.Ammo;
-				playerAmmo.ReduceByDamage(Damage);
+				AffectPlayer.Damage(player, Damage);
 			}
 		};
 	}

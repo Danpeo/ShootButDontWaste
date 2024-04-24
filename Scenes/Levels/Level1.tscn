@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://fwngd5v0ht4k"]
+[gd_scene load_steps=15 format=3 uid="uid://fwngd5v0ht4k"]
 
 [ext_resource type="Texture2D" uid="uid://7lbbt0ltjg6m" path="res://GameAssets/Paper-Pixels-8x8/with-background/Tiles.png" id="1_vn1rn"]
 [ext_resource type="Texture2D" uid="uid://o2ax0nu7eose" path="res://GameAssets/Paper-Pixels-8x8/thorns.png" id="2_y054l"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/Entities/DeathFloor.cs" id="5_ei0sc"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="5_tdhx2"]
 [ext_resource type="PackedScene" uid="uid://dmbk8m77psx8i" path="res://Scenes/Entities/Ammo/SingleCollectButton.tscn" id="8_nqc7w"]
+[ext_resource type="PackedScene" uid="uid://bd238pqty6uyg" path="res://Scenes/Entities/Enemies/Worm.tscn" id="9_egqbq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f3aki"]
 
@@ -4423,3 +4424,6 @@ position = Vector2(68, 133)
 
 [node name="SingleCollectButton3" parent="." instance=ExtResource("8_nqc7w")]
 position = Vector2(73, 133)
+
+[node name="Worm" parent="." instance=ExtResource("9_egqbq")]
+position = Vector2(51, 132)

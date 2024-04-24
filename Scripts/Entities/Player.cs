@@ -1,6 +1,6 @@
+using System.Diagnostics;
 using Godot;
 using Platformer.Scripts.Properties;
-using Platformer.Scripts.Utils;
 
 namespace Platformer.Scripts.Entities;
 
@@ -10,7 +10,7 @@ public partial class Player : CharacterBody2D
     [Export] public float JumpSpeed { get; set; } = -300;
     public float Direction { get; set; }
     public bool Jumped { get; set; }
-    public Ammo Ammo { get; set; }
+    public Ammo Ammo { get; private set; }
     private float _gravity = ProjectSettings.GetSetting(SettingConstant.Gravity).AsSingle();
     private CanShoot _canShoot;
     private bool _flipOrientation;
@@ -31,15 +31,20 @@ public partial class Player : CharacterBody2D
     public override void _Ready()
     {
         Ammo = GetNode<Ammo>("%PlayerAmmo");
+        Ammo.OnAmmoLessThanZero += die;
         _canShoot = GetNode<CanShoot>("%PlayerCanShoot");
         _canShoot.OnShooted += shots => Ammo.ReduceByShooting(shots);
+        return;
+
+        void die()
+        {
+            GetTree().ReloadCurrentScene();
+        }
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        /*
         Debug.Print(Ammo.Current + "AMMO");
-        */
         Vector2 currVelocity = Velocity;
         currVelocity.Y += _gravity * (float)delta;
 
