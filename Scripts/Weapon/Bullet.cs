@@ -1,10 +1,12 @@
 using Godot;
 using Platformer.Scripts.Entities.Enemies;
+using Platformer.Scripts.Properties;
 
 namespace Platformer.Scripts.Weapon;
 
 public partial class Bullet : CharacterBody2D
 {
+    [Export] public int Damage { get; set; } = 1;
     [Export] public float Speed { get; set; } = 50;
     [Export] public int BulletCountAsOneShot { get; set; } = 1;
     
@@ -20,9 +22,10 @@ public partial class Bullet : CharacterBody2D
         KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
         if (collision != null)
         {
-            if (collision.GetCollider() is IEnemy)
+            if (collision.GetCollider() is IEnemy enemy)
             {
-                
+                Health enemyHealth = enemy.Health;
+                enemyHealth.Reduce(Damage);
                 QueueFree();                
             }
             

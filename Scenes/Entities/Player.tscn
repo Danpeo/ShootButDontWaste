@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://caiipt70dcaui"]
+[gd_scene load_steps=6 format=3 uid="uid://caiipt70dcaui"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player.cs" id="1_dqshf"]
 [ext_resource type="PackedScene" uid="uid://bpr334qcbkpmv" path="res://Scenes/Animators/PlayerAnimatedSprite.tscn" id="4_0x5pd"]
-[ext_resource type="Script" path="res://Scripts/Entities/PlayerInput.cs" id="5_op48i"]
 [ext_resource type="PackedScene" uid="uid://bl77r6l1d24rk" path="res://Scenes/Properties/Ammo.tscn" id="19_d6fbc"]
 [ext_resource type="PackedScene" uid="uid://blpuiro8pnb6p" path="res://Scenes/Entities/CanShoot.tscn" id="20_kqwes"]
 
@@ -29,6 +28,4 @@ unique_name_in_owner = true
 position = Vector2(5, 1)
 
 [node name="PlayerAnimatedSprite" parent="." instance=ExtResource("4_0x5pd")]
-
-[node name="PlayerInput" type="Node" parent="."]
-script = ExtResource("5_op48i")
+script = null

@@ -24,10 +24,16 @@ public partial class Health : Node
             if (_current >= Max)
             {
                 _current = Max;
-            }        }
+            }
+        }
     }
 
     [Export] public int Max { get; set; } = 1;
 
-    public Action OnHealthIsZero { get; set; }
+    public Action? OnHealthIsZero { get; set; }
+
+    public void Reduce(int damage)
+    {
+        Current -= damage;
+    }
 }

@@ -1,4 +1,4 @@
-namespace Platformer.Scripts;
+namespace Platformer.Scripts.Constants;
 
 public static class SettingConstant
 {
