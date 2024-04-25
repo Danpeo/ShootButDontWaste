@@ -14,16 +14,17 @@ public class PlayerStateIdle : PlayerState
     public override void Enter()
     {
         base.Enter();
-        Player.PlayerAnimator.Play(PlayerAnimation.Idle);
+        Player.PlayAnimation(PlayerAnimation.Idle);
     }
 
     public override void Exit()
     {
     }
 
-    public override void Update(double delta)
+    public override void PhysicsProcess(double delta)
     {
         TrySetJumpState();
+        TrySetShootState();
 
         float direction = Input.GetAxis(PlayerInput.MoveLeft, PlayerInput.MoveRight);
 

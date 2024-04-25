@@ -6,6 +6,8 @@ namespace Platformer.Scripts.Utils;
 public class EasyTimer
 {
     public Timer Timer { get; private set; }
+    public double WaitTime => Timer.WaitTime;
+    private bool QueueFreeOnTimeout { get; set; }
 
     public EasyTimer(Node node, Action timeOut, float waitTime = 1.0f, bool oneShot = true)
     {
@@ -21,7 +23,7 @@ public class EasyTimer
     public void Stop()
     {
         Timer.Stop();
-        if (Timer.OneShot)
+        if (QueueFreeOnTimeout)
             Timer.QueueFree();
     }
 }

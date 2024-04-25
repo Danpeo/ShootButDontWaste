@@ -1,9 +1,13 @@
+using System;
 using System.Diagnostics;
 using Godot;
 using Platformer.Scripts.Constants;
+using Platformer.Scripts.Constants.Animations;
+using Platformer.Scripts.Effects;
 using Platformer.Scripts.Properties;
 using Platformer.Scripts.State;
 using Platformer.Scripts.State.PlayerStates;
+using Platformer.Scripts.Utils;
 
 namespace Platformer.Scripts.Entities;
 
@@ -11,36 +15,23 @@ public partial class Player : CharacterBody2D
 {
     [Export] public float Speed { get; set; } = 250;
     [Export] public float JumpSpeed { get; set; } = -300;
-    public AnimatedSprite2D PlayerAnimator { get; set; }
-    public float Direction { get; set; }
+    private AnimatedSprite2D? _playerAnimator { get; set; }
+    public float Direction { get; private set; }
     public Ammo Ammo { get; private set; } = null!;
     private float _gravity = ProjectSettings.GetSetting(SettingConstant.Gravity).AsSingle();
     private CanShoot _canShoot = null!;
-    private bool _flipOrientation;
-    private Fsm _fsm;
-
-
-    private bool FlipOrientation
-    {
-        get => _flipOrientation;
-        set
-        {
-            if (_flipOrientation != value)
-            {
-                Scale = new Vector2(-1, Scale.Y);
-                _flipOrientation = value;
-            }
-        }
-    }
+    private OrientedToDirection _orientedToDirection = null!;
+    private Fsm? _fsm;
 
     public override void _Ready()
     {
-        PlayerAnimator = GetNode<AnimatedSprite2D>("%PlayerAnimatedSprite");
+        _orientedToDirection = GetNode<OrientedToDirection>("OrientedToDirection");
+
+        _playerAnimator = GetNode<AnimatedSprite2D>("%PlayerAnimatedSprite");
         Ammo = GetNode<Ammo>("%PlayerAmmo");
         Ammo.OnAmmoLessThanZero += die;
         _canShoot = GetNode<CanShoot>("%PlayerCanShoot");
         _canShoot.OnShooted += shots => Ammo.ReduceByShooting(shots);
-
         AddStates();
 
         return;
@@ -53,30 +44,40 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        _fsm.Update(delta);
+        _fsm!.Update(delta);
 
         Debug.Print(Ammo.Current + "AMMO");
         Vector2 currVelocity = Velocity;
         currVelocity.Y += _gravity * (float)delta;
         currVelocity.X = Direction * Speed;
 
-        DefineOrientation(currVelocity);
         Velocity = currVelocity;
         MoveAndSlide();
     }
 
-    public void Shoot() => _canShoot.Shoot(Rotation, Ammo.Current);
+    public void OnAmmoReducedByDamage(Action action) =>
+        Ammo.OnReducedByDamage += action;
 
-    private void DefineOrientation(Vector2 velocity)
+    public void Move() =>
+        Direction = Input.GetAxis(PlayerInput.MoveLeft, PlayerInput.MoveRight);
+
+    public void Jump() =>
+        Velocity = Velocity with { Y = JumpSpeed };
+
+    public void Shoot() =>
+        _canShoot.Shoot(Rotation, Ammo.Current);
+
+    public void PlayAnimation(StringName animationName) =>
+        _playerAnimator!.Play(animationName);
+
+    public void Hit(float frameFreezeDuration)
     {
-        if (velocity.X > 0)
-        {
-            FlipOrientation = false;
-        }
-        else if (velocity.X < 0)
-        {
-            FlipOrientation = true;
-        }
+        Direction = 0;
+        _playerAnimator!.Play(PlayerAnimation.Hit);
+        const float frameFreezeDurationMultiplier = 1.5f;
+        const float frameFreezeTiemScale = 0.05f;
+        this.Autoload<FrameFreeze>("FrameFreeze")
+            .Activate(frameFreezeTiemScale, frameFreezeDuration * frameFreezeDurationMultiplier);
     }
 
     private void AddStates()
@@ -86,6 +87,7 @@ public partial class Player : CharacterBody2D
         _fsm.Add(new PlayerStateMove(_fsm, this));
         _fsm.Add(new PlayerStateJump(_fsm, this));
         _fsm.Add(new PlayerStateHit(_fsm, this));
+        _fsm.Add(new PlayerStateShoot(_fsm, this));
         _fsm.Set<PlayerStateIdle>();
     }
 }

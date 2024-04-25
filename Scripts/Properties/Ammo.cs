@@ -6,7 +6,7 @@ namespace Platformer.Scripts.Properties;
 public partial class Ammo : Node
 {
     private int _current = 5;
-    public Action OnAmmoLessThanZero { get; set; }
+    public Action? OnAmmoLessThanZero { get; set; }
 
     [Export]
     public int Current
@@ -31,9 +31,9 @@ public partial class Ammo : Node
 
     [Export] public int Max { get; set; } = 15;
 
-    public Action OnReducedByShooting { get; set; }
-    public Action OnReducedByDamage { get; set; }
-    public Action OnAdd { get; set; }
+    public Action? OnReducedByShooting { get; set; }
+    public Action? OnReducedByDamage { get; set; }
+    public Action? OnAdd { get; set; }
 
     public void ReduceByShooting(int value)
     {

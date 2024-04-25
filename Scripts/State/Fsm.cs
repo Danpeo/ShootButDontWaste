@@ -6,16 +6,16 @@ namespace Platformer.Scripts.State;
 public class Fsm
 {
     public FsmState? CurrentState { get; private set; }
-    private Dictionary<Type, FsmState> _states = new();
+    private readonly Dictionary<Type, FsmState> _states = new();
 
-    public void Add(FsmState state)
+    public void Add<TState>(TState state) where TState : FsmState
     {
         _states.Add(state.GetType(), state);
     }
 
-    public void Set<T>() where T : FsmState
+    public void Set<TState>() where TState : FsmState
     {
-        var type = typeof(T);
+        var type = typeof(TState);
         if (CurrentState?.GetType() == type)
         {
             return;
@@ -31,6 +31,6 @@ public class Fsm
 
     public void Update(double delta)
     {
-        CurrentState?.Update(delta);
+        CurrentState?.PhysicsProcess(delta);
     }
 }

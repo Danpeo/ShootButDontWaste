@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqy3hcf8f124"]
+
+[ext_resource type="Script" path="res://Scripts/Properties/OrientedToDirection.cs" id="1_4qsub"]
+
+[node name="OrientedToDirection" type="Node"]
+script = ExtResource("1_4qsub")

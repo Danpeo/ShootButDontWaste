@@ -15,18 +15,18 @@ public class PlayerStateMove : PlayerState
     {
         base.Enter();
 
-        Player.PlayerAnimator.Play(PlayerAnimation.Run);
+        Player.PlayAnimation(PlayerAnimation.Run);
     }
 
-    public override void Update(double delta)
+    public override void PhysicsProcess(double delta)
     {
         TrySetJumpState();
         TryPlayJump(PlayerAnimation.Run);
+        TrySetShootState();
 
-        float direction = Input.GetAxis(PlayerInput.MoveLeft, PlayerInput.MoveRight);
-        Player.Direction = direction;
+        Player.Move();
 
-        if (direction == 0)
+        if (Player.Direction == 0)
         {
             Fsm.Set<PlayerStateIdle>();
         }

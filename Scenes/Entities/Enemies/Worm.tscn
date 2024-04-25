@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bd238pqty6uyg"]
+[gd_scene load_steps=17 format=3 uid="uid://bd238pqty6uyg"]
 
 [ext_resource type="Texture2D" uid="uid://befssixko7kms" path="res://GameAssets/Paper-Pixels-8x8/enemies/worm/enemies075.png" id="1_35h2c"]
 [ext_resource type="Script" path="res://Scripts/Entities/Enemies/Worm.cs" id="1_d06bc"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dttf0ixh4hh4u" path="res://GameAssets/Paper-Pixels-8x8/enemies/worm/enemies074.png" id="9_ned4h"]
 [ext_resource type="PackedScene" uid="uid://bn408dw7xw58d" path="res://Scenes/Entities/DamagesOnTouch.tscn" id="10_hv6p2"]
 [ext_resource type="PackedScene" uid="uid://c01ljmhepj50h" path="res://Scenes/Properties/Health.tscn" id="12_bxr7j"]
+[ext_resource type="PackedScene" uid="uid://cqy3hcf8f124" path="res://Scenes/Properties/OrientedToDirection.tscn" id="13_albiy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yx7e1"]
 animations = [{
@@ -89,3 +90,5 @@ shape = SubResource("CircleShape2D_m3kqq")
 unique_name_in_owner = true
 Current = 2
 Max = 2
+
+[node name="OrientedToDirection" parent="." instance=ExtResource("13_albiy")]

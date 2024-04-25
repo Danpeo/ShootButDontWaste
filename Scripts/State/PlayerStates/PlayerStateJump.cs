@@ -13,12 +13,14 @@ public class PlayerStateJump : PlayerState
     {
         base.Enter();
 
-        Player.PlayerAnimator.Play(PlayerAnimation.Jump);
+        Player.PlayAnimation(PlayerAnimation.Jump);
     }
 
-    public override void Update(double delta)
+    public override void PhysicsProcess(double delta)
     {
-        Player.Velocity = Player.Velocity with { Y = Player.JumpSpeed };
+        TrySetShootState();
+
+        Player.Jump();
 
         if (!Player.IsOnFloor())
         {

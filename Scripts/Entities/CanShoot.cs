@@ -8,10 +8,10 @@ namespace Platformer.Scripts.Entities;
 public partial class CanShoot : Node2D
 {
     [Export] public string BulletName { get; set; } = "Bullet";
-    [Export] public string WeaponSceneName { get; set; }
+    [Export] public string WeaponSceneName { get; set; } = "";
     [Export] public float Cooldown { get; set; } = 0.25f;
 
-    public Action<int> OnShooted { get; set; }
+    public Action<int>? OnShooted { get; set; }
 
     private PackedScene _bullet;
     private Timer _shootTimer;

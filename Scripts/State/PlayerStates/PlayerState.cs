@@ -1,4 +1,4 @@
-using Platformer.Scripts.Constants.Animations;
+using Platformer.Scripts.Constants;
 using Platformer.Scripts.Entities;
 using Platformer.Scripts.Utils;
 
@@ -11,28 +11,31 @@ public class PlayerState : FsmState
     public PlayerState(Fsm fsm, Player player) : base(fsm)
     {
         Player = player;
-        Player.Ready += () => Player.Ammo.OnReducedByDamage += () => Fsm.Set<PlayerStateHit>();
+        Player.Ready += () => Player.OnAmmoReducedByDamage(() => Fsm.Set<PlayerStateHit>());
     }
 
     public override void Enter()
     {
     }
 
-    public override void Update(double delta)
+    public override void PhysicsProcess(double delta)
     {
-
     }
 
     protected void TryPlayJump(string stateAnimation)
     {
-        Player.PlayerAnimator.Play(Player.Velocity.Y < 0 ? PlayerAnimation.Jump : stateAnimation);
+        Player.PlayAnimation(Player.Velocity.Y < 0 ? PlayerInput.Jump : stateAnimation);
     }
 
     protected void TrySetJumpState()
     {
-        if (InputExt.IsActionHolding(PlayerAnimation.Jump) && Player.IsOnFloor())
-        {
+        if (InputExt.IsActionHolding(PlayerInput.Jump) && Player.IsOnFloor())
             Fsm.Set<PlayerStateJump>();
-        }
+    }
+
+    protected void TrySetShootState()
+    {
+        if (InputExt.IsActionHolding(PlayerInput.Shoot))
+            Fsm.Set<PlayerStateShoot>();
     }
 }

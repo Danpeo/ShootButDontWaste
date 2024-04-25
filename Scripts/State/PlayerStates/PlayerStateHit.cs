@@ -1,6 +1,4 @@
-using Platformer.Scripts.Constants.Animations;
 using Platformer.Scripts.Constants.Times;
-using Platformer.Scripts.Effects;
 using Platformer.Scripts.Entities;
 using Platformer.Scripts.Utils;
 
@@ -19,9 +17,7 @@ public class PlayerStateHit : PlayerState
         _hitTimer = new EasyTimer(Player, () => Fsm.Set<PlayerStateIdle>(), PlayerTime.Hit);
 
         _hitTimer.Start();
-        Player.Direction = 0;
-        Player.PlayerAnimator.Play(PlayerAnimation.Hit);
-        Player.Autoload<FrameFreeze>("FrameFreeze").Activate(0.05f, (float)_hitTimer.Timer.WaitTime);
+        Player.Hit((float)_hitTimer.WaitTime);
     }
 
     public override void Exit()

@@ -17,7 +17,12 @@ public abstract class FsmState
     {
     }
 
-    public virtual void Update(double delta)
+    public virtual void PhysicsProcess(double delta)
     {
+    }
+
+    public virtual void Process(double delta)
+    {
+        
     }
 }
