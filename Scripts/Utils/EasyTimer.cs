@@ -7,7 +7,7 @@ public class EasyTimer
 {
     public Timer Timer { get; private set; }
     public double WaitTime => Timer.WaitTime;
-    private bool QueueFreeOnTimeout { get; set; }
+    public bool QueueFreeOnTimeout { get; set; }
 
     public EasyTimer(Node node, Action timeOut, float waitTime = 1.0f, bool oneShot = true)
     {
@@ -15,7 +15,16 @@ public class EasyTimer
         Timer.OneShot = oneShot;
         Timer.WaitTime = waitTime;
         node.AddChild(Timer);
-        Timer.Timeout += timeOut;
+        Timer.Timeout += () =>
+        {
+            if (QueueFreeOnTimeout)
+            {
+                Stop();
+                Timer.QueueFree();
+            }
+
+            timeOut.Invoke();
+        };
     }
 
     public void Start() => Timer.Start();
@@ -23,7 +32,5 @@ public class EasyTimer
     public void Stop()
     {
         Timer.Stop();
-        if (QueueFreeOnTimeout)
-            Timer.QueueFree();
     }
 }

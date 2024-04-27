@@ -6,16 +6,15 @@ namespace Platformer.Scripts.State.PlayerStates;
 
 public class PlayerStateHit : PlayerState
 {
-    private EasyTimer? _hitTimer;
+    private readonly EasyTimer _hitTimer;
 
     public PlayerStateHit(Fsm fsm, Player player) : base(fsm, player)
     {
+        _hitTimer = new EasyTimer(Player, () => Fsm.Set<PlayerStateIdle>(), PlayerTime.Hit);
     }
 
     public override void Enter()
     {
-        _hitTimer = new EasyTimer(Player, () => Fsm.Set<PlayerStateIdle>(), PlayerTime.Hit);
-
         _hitTimer.Start();
         Player.Hit((float)_hitTimer.WaitTime);
     }

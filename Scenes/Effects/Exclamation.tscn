@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfk4degqrcrtq"]
+
+[ext_resource type="Texture2D" uid="uid://de5x6ighcsse0" path="res://GameAssets/Effects/ExclamationMark2.png" id="1_w7skh"]
+[ext_resource type="Texture2D" uid="uid://c75kawfaaskvs" path="res://GameAssets/Effects/ExclamationMark1.png" id="2_upaol"]
+[ext_resource type="Script" path="res://Scripts/Effects/Exclamation.cs" id="3_f15ty"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tbu3l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_w7skh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_upaol")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"Hide",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_upaol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_w7skh")
+}],
+"loop": true,
+"name": &"Show",
+"speed": 6.0
+}]
+
+[node name="Exclamation" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_tbu3l")
+animation = &"Hide"
+frame = 2
+frame_progress = 0.861543
+script = ExtResource("3_f15ty")

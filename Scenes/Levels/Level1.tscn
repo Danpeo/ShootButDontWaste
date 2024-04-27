@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ccjotbukj4im4" path="res://Scenes/Entities/Obstacles/Thorns.tscn" id="4_jesiq"]
 [ext_resource type="Script" path="res://Scripts/Entities/DeathFloor.cs" id="5_ei0sc"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2D.gd" id="5_tdhx2"]
-[ext_resource type="PackedScene" uid="uid://dmbk8m77psx8i" path="res://Scenes/Entities/Ammo/SingleCollectButton.tscn" id="8_nqc7w"]
+[ext_resource type="PackedScene" uid="uid://dmbk8m77psx8i" path="res://Scenes/Entities/Ammo/SingleCollectBullet.tscn" id="8_nqc7w"]
 [ext_resource type="PackedScene" uid="uid://bd238pqty6uyg" path="res://Scenes/Entities/Enemies/Worm.tscn" id="9_egqbq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f3aki"]
@@ -4416,13 +4416,13 @@ script = ExtResource("5_ei0sc")
 position = Vector2(592, 286.5)
 shape = SubResource("RectangleShape2D_xpyk0")
 
-[node name="SingleCollectButton" parent="." instance=ExtResource("8_nqc7w")]
+[node name="SingleCollectBullet" parent="." instance=ExtResource("8_nqc7w")]
 position = Vector2(63, 133)
 
-[node name="SingleCollectButton2" parent="." instance=ExtResource("8_nqc7w")]
+[node name="SingleCollectBullet 2" parent="." instance=ExtResource("8_nqc7w")]
 position = Vector2(68, 133)
 
-[node name="SingleCollectButton3" parent="." instance=ExtResource("8_nqc7w")]
+[node name="SingleCollectBullet 3" parent="." instance=ExtResource("8_nqc7w")]
 position = Vector2(73, 133)
 
 [node name="Worm" parent="." instance=ExtResource("9_egqbq")]

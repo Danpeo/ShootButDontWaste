@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using Godot;
 using Platformer.Scripts.Constants;
 using Platformer.Scripts.Constants.Animations;
@@ -15,13 +14,13 @@ public partial class Player : CharacterBody2D
 {
     [Export] public float Speed { get; set; } = 250;
     [Export] public float JumpSpeed { get; set; } = -300;
-    private AnimatedSprite2D? _playerAnimator { get; set; }
+    private AnimatedSprite2D _playerAnimator = null!;
     public float Direction { get; private set; }
     public Ammo Ammo { get; private set; } = null!;
     private float _gravity = ProjectSettings.GetSetting(SettingConstant.Gravity).AsSingle();
     private CanShoot _canShoot = null!;
     private OrientedToDirection _orientedToDirection = null!;
-    private Fsm? _fsm;
+    private Fsm _fsm = null!;
 
     public override void _Ready()
     {
@@ -44,22 +43,25 @@ public partial class Player : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        _fsm!.Update(delta);
-
+        /*
         Debug.Print(Ammo.Current + "AMMO");
+        */
         Vector2 currVelocity = Velocity;
         currVelocity.Y += _gravity * (float)delta;
         currVelocity.X = Direction * Speed;
 
         Velocity = currVelocity;
         MoveAndSlide();
+        _fsm.PhysicsProcess(delta);
     }
 
     public void OnAmmoReducedByDamage(Action action) =>
         Ammo.OnReducedByDamage += action;
 
-    public void Move() =>
+    public void Move()
+    {
         Direction = Input.GetAxis(PlayerInput.MoveLeft, PlayerInput.MoveRight);
+    }
 
     public void Jump() =>
         Velocity = Velocity with { Y = JumpSpeed };
@@ -73,7 +75,8 @@ public partial class Player : CharacterBody2D
     public void Hit(float frameFreezeDuration)
     {
         Direction = 0;
-        _playerAnimator!.Play(PlayerAnimation.Hit);
+        Velocity = Vector2.Zero;
+        _playerAnimator.Play(PlayerAnimation.Hit);
         const float frameFreezeDurationMultiplier = 1.5f;
         const float frameFreezeTiemScale = 0.05f;
         this.Autoload<FrameFreeze>("FrameFreeze")

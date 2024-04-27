@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dmbk8m77psx8i"]
 
-[ext_resource type="Script" path="res://Scripts/Entities/Ammos/SingleCollectButton.cs" id="1_oeqp6"]
+[ext_resource type="Script" path="res://Scripts/Entities/Ammos/SingleCollectBullet.cs" id="1_nwrqe"]
 [ext_resource type="Texture2D" uid="uid://d2dqvglu8kqjp" path="res://GameAssets/Collectables/SingleCollectButton/singlecolbutt1.png" id="2_mag5a"]
 [ext_resource type="Texture2D" uid="uid://du1i8yvn7mmjf" path="res://GameAssets/Collectables/SingleCollectButton/singlecolbutt2.png" id="3_u8wl7"]
 [ext_resource type="Texture2D" uid="uid://dilkyy2a1juw7" path="res://GameAssets/Collectables/SingleCollectButton/singlecolbutt3.png" id="4_00oue"]
@@ -33,8 +33,8 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="SingleCollectButton" type="Area2D"]
-script = ExtResource("1_oeqp6")
+[node name="SingleCollectBullet" type="Area2D"]
+script = ExtResource("1_nwrqe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.5, 0.5)

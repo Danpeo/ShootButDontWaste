@@ -29,7 +29,7 @@ public class Fsm
         }
     }
 
-    public void Update(double delta)
+    public void PhysicsProcess(double delta)
     {
         CurrentState?.PhysicsProcess(delta);
     }
