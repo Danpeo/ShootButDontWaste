@@ -47,14 +47,7 @@ public partial class Worm : CharacterBody2D, IEnemy
         _currentSpeed = OriginalSpeed;
         AddStates();
     }
-
-    public override void _Process(double delta)
-    {
-        /*
-        GD.Print($"WORM HEALTH: {Health.Current}");
-    */
-    }
-
+    
     public override void _PhysicsProcess(double delta)
     {
         _fsm.PhysicsProcess(delta);

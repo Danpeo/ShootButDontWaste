@@ -7,10 +7,10 @@ public partial class OrientedToDirection : Node
     private CharacterBody2D _body = null!;
     private bool _flipOrientation;
 
-    private bool FlipOrientation
+    public bool FlipOrientation
     {
         get => _flipOrientation;
-        set
+        private set
         {
             if (_flipOrientation != value)
             {

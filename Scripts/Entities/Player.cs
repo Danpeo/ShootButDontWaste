@@ -14,10 +14,12 @@ public partial class Player : CharacterBody2D
 {
     [Export] public float Speed { get; set; } = 250;
     [Export] public float JumpSpeed { get; set; } = -300;
+    [Export] private float _stunDistanceX = 40f;
+    [Export] private float _stunDistanceY = -180f;
+
     private AnimatedSprite2D _playerAnimator = null!;
-    public float Direction { get; private set; }
+    public float Direction { get; internal set; }
     public Ammo Ammo { get; private set; } = null!;
-    private float _gravity = ProjectSettings.GetSetting(SettingConstant.Gravity).AsSingle();
     private CanShoot _canShoot = null!;
     private OrientedToDirection _orientedToDirection = null!;
     private Fsm _fsm = null!;
@@ -32,7 +34,6 @@ public partial class Player : CharacterBody2D
         _canShoot = GetNode<CanShoot>("%PlayerCanShoot");
         _canShoot.OnShooted += shots => Ammo.ReduceByShooting(shots);
         AddStates();
-
         return;
 
         void die()
@@ -47,10 +48,10 @@ public partial class Player : CharacterBody2D
         Debug.Print(Ammo.Current + "AMMO");
         */
         Vector2 currVelocity = Velocity;
-        currVelocity.Y += _gravity * (float)delta;
+        currVelocity.Y += World.GetGravity() * (float)delta;
         currVelocity.X = Direction * Speed;
-
         Velocity = currVelocity;
+
         MoveAndSlide();
         _fsm.PhysicsProcess(delta);
     }
@@ -74,13 +75,22 @@ public partial class Player : CharacterBody2D
 
     public void Hit(float frameFreezeDuration)
     {
-        Direction = 0;
-        Velocity = Vector2.Zero;
         _playerAnimator.Play(PlayerAnimation.Hit);
         const float frameFreezeDurationMultiplier = 1.5f;
         const float frameFreezeTiemScale = 0.05f;
         this.Autoload<FrameFreeze>("FrameFreeze")
             .Activate(frameFreezeTiemScale, frameFreezeDuration * frameFreezeDurationMultiplier);
+
+        bool flippedDirection = _orientedToDirection.FlipOrientation;
+
+        Direction = flippedDirection switch
+        {
+            true when Direction == 0 => 1,
+            false when Direction == 0 => -1,
+            _ => -Direction
+        };
+
+        Velocity = new Vector2(Direction * _stunDistanceX, _stunDistanceY);
     }
 
     private void AddStates()

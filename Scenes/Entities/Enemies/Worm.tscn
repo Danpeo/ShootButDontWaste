@@ -13,10 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://da2w4f5bxsloi" path="res://GameAssets/Paper-Pixels-8x8/enemies/worm/enemies072.png" id="7_36in1"]
 [ext_resource type="Texture2D" uid="uid://7fhl63ix2q68" path="res://GameAssets/Paper-Pixels-8x8/enemies/worm/enemies073.png" id="8_vmw3g"]
 [ext_resource type="Texture2D" uid="uid://dttf0ixh4hh4u" path="res://GameAssets/Paper-Pixels-8x8/enemies/worm/enemies074.png" id="9_ned4h"]
-[ext_resource type="PackedScene" uid="uid://bn408dw7xw58d" path="res://Scenes/Entities/DamagesOnTouch.tscn" id="10_hv6p2"]
 [ext_resource type="PackedScene" uid="uid://c01ljmhepj50h" path="res://Scenes/Properties/Health.tscn" id="12_bxr7j"]
 [ext_resource type="PackedScene" uid="uid://cqy3hcf8f124" path="res://Scenes/Properties/OrientedToDirection.tscn" id="13_albiy"]
 [ext_resource type="Script" path="res://Scripts/Entities/Areas/SpotArea.cs" id="14_64dul"]
+[ext_resource type="PackedScene" uid="uid://2tw2dty2u5au" path="res://Scenes/Properties/ParentCanDamageOnTouch.tscn" id="14_xv6wo"]
 [ext_resource type="PackedScene" uid="uid://dfk4degqrcrtq" path="res://Scenes/Effects/Exclamation.tscn" id="18_01psy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yx7e1"]
@@ -109,7 +109,7 @@ shape = SubResource("RectangleShape2D_q27le")
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_m3kqq")
 
-[node name="DamagesOnTouch" parent="DamageArea" instance=ExtResource("10_hv6p2")]
+[node name="ParentCanDamageOnTouch" parent="DamageArea" instance=ExtResource("14_xv6wo")]
 
 [node name="WormHealth" parent="." instance=ExtResource("12_bxr7j")]
 unique_name_in_owner = true

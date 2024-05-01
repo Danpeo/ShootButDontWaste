@@ -1,3 +1,4 @@
+using Godot;
 using Platformer.Scripts.Constants.Times;
 using Platformer.Scripts.Entities;
 using Platformer.Scripts.Utils;
@@ -21,6 +22,7 @@ public class PlayerStateHit : PlayerState
 
     public override void Exit()
     {
-        _hitTimer!.Stop();
+        _hitTimer.Stop();
+        Player.Direction = 0;
     }
 }

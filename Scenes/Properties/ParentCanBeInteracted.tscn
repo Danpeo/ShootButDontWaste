@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bopfmhbrqi8et"]
+
+[ext_resource type="Script" path="res://Scripts/Properties/ParentCanBeInteracted.cs" id="1_388el"]
+
+[node name="ParentCanBeInteracted" type="Node"]
+script = ExtResource("1_388el")
