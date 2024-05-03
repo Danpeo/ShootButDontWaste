@@ -1,9 +1,11 @@
 using System;
+using System.Diagnostics;
 using Godot;
 using Platformer.Scripts.Constants;
 using Platformer.Scripts.Constants.Animations;
 using Platformer.Scripts.Effects;
 using Platformer.Scripts.Properties;
+using Platformer.Scripts.Properties.Interfaces;
 using Platformer.Scripts.State;
 using Platformer.Scripts.State.PlayerStates;
 using Platformer.Scripts.Utils;
@@ -12,14 +14,16 @@ namespace Platformer.Scripts.Entities;
 
 public partial class Player : CharacterBody2D
 {
-    [Export] public float Speed { get; set; } = 250;
-    [Export] public float JumpSpeed { get; set; } = -300;
+    [Export] public float Speed { get; set; } = 250f;
+    [Export] public float JumpSpeed { get; set; } = -300f;
     [Export] private float _stunDistanceX = 40f;
     [Export] private float _stunDistanceY = -180f;
+    public Ammo Ammo { get; private set; } = null!;
+
+    public IThrowable? CurrentThrowableObject { get; set; }
 
     private AnimatedSprite2D _playerAnimator = null!;
     public float Direction { get; internal set; }
-    public Ammo Ammo { get; private set; } = null!;
     private CanShoot _canShoot = null!;
     private OrientedToDirection _orientedToDirection = null!;
     private Fsm _fsm = null!;
@@ -58,11 +62,12 @@ public partial class Player : CharacterBody2D
 
     public void OnAmmoReducedByDamage(Action action) =>
         Ammo.OnReducedByDamage += action;
+    
+    public bool IsHoldingObject() => 
+        CurrentThrowableObject != null;
 
-    public void Move()
-    {
-        Direction = Input.GetAxis(PlayerInput.MoveLeft, PlayerInput.MoveRight);
-    }
+    public void Move() =>
+        Direction = Input.GetAxis(InputBindings.MoveLeft, InputBindings.MoveRight);
 
     public void Jump() =>
         Velocity = Velocity with { Y = JumpSpeed };
@@ -71,7 +76,7 @@ public partial class Player : CharacterBody2D
         _canShoot.Shoot(Rotation, Ammo.Current);
 
     public void PlayAnimation(StringName animationName) =>
-        _playerAnimator!.Play(animationName);
+        _playerAnimator.Play(animationName);
 
     public void Hit(float frameFreezeDuration)
     {

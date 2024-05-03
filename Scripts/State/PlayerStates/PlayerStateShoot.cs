@@ -18,12 +18,12 @@ public class PlayerStateShoot : PlayerState
 
     public override void PhysicsProcess(double delta)
     {
-        if (!InputExt.IsActionHolding(PlayerInput.Shoot))
+        if (!InputExt.IsActionHolding(InputBindings.Shoot))
         {
             Fsm.Set<PlayerStateIdle>();
             return;
         }
-
+        
         Player.Shoot();
     }
 }

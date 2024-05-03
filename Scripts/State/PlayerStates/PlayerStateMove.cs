@@ -1,7 +1,6 @@
 using Godot;
 using Platformer.Scripts.Constants.Animations;
 using Platformer.Scripts.Entities;
-using PlayerInput = Platformer.Scripts.Constants.PlayerInput;
 
 namespace Platformer.Scripts.State.PlayerStates;
 

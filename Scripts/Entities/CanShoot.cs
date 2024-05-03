@@ -13,13 +13,13 @@ public partial class CanShoot : Node2D
 
     public Action<int>? OnShooted { get; set; }
 
-    private PackedScene _bullet;
-    private Timer _shootTimer;
+    private PackedScene _bulletScene = null!;
+    private Timer _shootTimer = null!;
     private bool _canShoot = true;
 
     public override void _Ready()
     {
-        _bullet = GD.Load<PackedScene>($"res://Scenes/Weapon/{BulletName}.tscn");
+        _bulletScene = GD.Load<PackedScene>($"res://Scenes/Weapon/{BulletName}.tscn");
         _shootTimer = GetNode<Timer>("Timer");
         _shootTimer.WaitTime = Cooldown;
         _shootTimer.Timeout += () => _canShoot = true;
@@ -30,7 +30,7 @@ public partial class CanShoot : Node2D
         if (!_canShoot || ammo <= 0)
             return;
 
-        var bullet = (Bullet)_bullet.Instantiate();
+        var bullet = (Bullet)_bulletScene.Instantiate();
         bullet.Construct(GetNode<Node2D>($"%{WeaponSceneName}").GlobalPosition, rotation);
         GetTree().Root.AddChild(bullet);
         _canShoot = false;

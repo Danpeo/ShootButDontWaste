@@ -1,65 +1,80 @@
 using Godot;
 using Platformer.Scripts.Properties;
+using Platformer.Scripts.Properties.Interfaces;
+using Platformer.Scripts.State;
+using Platformer.Scripts.State.ThrowableStates;
 
 namespace Platformer.Scripts.Entities.Throwables;
 
-public partial class ThrowableBox : CharacterBody2D
+public partial class ThrowableBox : CharacterBody2D, IThrowable
 {
-    [Export] private float _speed = 500f;
-    private bool _isHeld;
+    [Export] private float _xVelocity = 200f;
+    [Export] private float _yVelocity = -80f;
+    [Export] private float _holdingOffset = 5f;
+    public bool IsHeld { get; private set; }
     private InteractArea _pickableArea = null!;
     private Vector2 _originalPosition;
+    private float _direction;
+    private Fsm _fsm = null!;
+
 
     public override void _Ready()
     {
         _originalPosition = Position;
-        _pickableArea = GetNode<InteractArea>("%PickableArea");
+        _pickableArea = GetNode<InteractArea>("InteractArea");
+        _fsm = new Fsm();
+        _fsm.Add(new ThrowableStateIdle(_fsm, this));
+        _fsm.Add(new ThrowableStatePickup(_fsm, this));
+        _fsm.Add(new ThrowableStateThrow(_fsm, this));
+        _fsm.Add(new ThrowableStateDrop(_fsm, this));
+        _fsm.Set<ThrowableStateIdle>();
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        /*if (IsPlayerInArea() && Input.IsActionPressed("Pickup"))
+        Vector2 currVelocity = Velocity;
+        currVelocity.Y += World.GetGravity() * (float)delta;
+        Velocity = currVelocity;
+        MoveAndSlide();
+
+        if (IsOnFloor())
         {
-            Pickup();
+            Velocity = Vector2.Zero;
         }
 
-        if (_isHeld && IsPlayerInArea())
+        if (IsHeld && IsPlayerInArea())
         {
             Player player = _pickableArea.I.Player!;
             Position = player.Position +
-                       player.Transform.X * 5f;
+                       player.Transform.X * _holdingOffset;
+            _direction = player.Scale.Y;
+            player.CurrentThrowableObject = this;
         }
 
-        if (_isHeld && Input.IsActionPressed("Throw"))
-        {
-            Throw((float)delta);
-        }*/
-
-        Velocity = Velocity with { Y = World.GetGravity() * (float)delta, X = 30f };
+        _fsm.PhysicsProcess(delta);
     }
 
     public void Pickup()
     {
-        if (IsPlayerInArea() && !_isHeld)
-        {
-            _isHeld = true;
-        }
+        IsHeld = true;
     }
 
-    public void Throw(float delta)
+    public void Drop()
     {
-        if (_isHeld && IsPlayerInArea())
+        IsHeld = false;
+    }
+
+    public void Throw()
+    {
+        if (IsHeld && IsPlayerInArea())
         {
-            _isHeld = false;
-
-            Velocity = new Vector2(_speed, 50).Rotated(Rotation);
-
-            Vector2 throwDirection = (Position - _pickableArea.I.Player!.Position).Normalized();
-            KinematicCollision2D collision = MoveAndCollide(Velocity * delta);
+            IsHeld = false;
+            Velocity = Velocity with { X = _xVelocity * _direction, Y = _yVelocity };
+            _pickableArea.I.Player!.CurrentThrowableObject = null;
         }
     }
 
-    private bool IsPlayerInArea() =>
+    public bool IsPlayerInArea() =>
         _pickableArea.I.Player != null;
 
     private void OnVisibilityNotifier2DScreenExited() => QueueFree();

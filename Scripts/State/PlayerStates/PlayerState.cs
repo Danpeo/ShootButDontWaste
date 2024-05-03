@@ -1,3 +1,4 @@
+using Godot;
 using Platformer.Scripts.Constants;
 using Platformer.Scripts.Entities;
 using Platformer.Scripts.Utils;
@@ -24,18 +25,24 @@ public class PlayerState : FsmState
 
     protected void TryPlayJump(string stateAnimation)
     {
-        Player.PlayAnimation(Player.Velocity.Y < 0 ? PlayerInput.Jump : stateAnimation);
+        Player.PlayAnimation(Player.Velocity.Y < 0 ? InputBindings.Jump : stateAnimation);
     }
 
     protected void TrySetJumpState()
     {
-        if (InputExt.IsActionHolding(PlayerInput.Jump) && Player.IsOnFloor())
+        if (InputExt.IsActionHolding(InputBindings.Jump) && Player.IsOnFloor())
             Fsm.Set<PlayerStateJump>();
     }
-
+    
     protected void TrySetShootState()
     {
-        if (InputExt.IsActionHolding(PlayerInput.Shoot))
+        if (InputExt.IsActionHolding(InputBindings.Shoot))
             Fsm.Set<PlayerStateShoot>();
+    }
+
+    protected void TrySetHoldObjectState()
+    {
+        if (Player.IsHoldingObject())
+            Fsm.Set<PlayerStateHoldObject>();
     }
 }

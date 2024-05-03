@@ -1,0 +1,28 @@
+[gd_scene load_steps=7 format=3 uid="uid://ck4o4utwdiaun"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/Throwables/ThrowableBox.cs" id="1_7m48i"]
+[ext_resource type="Texture2D" uid="uid://gk3841f8stq1" path="res://GameAssets/Weapon/Block.png" id="1_l3pvn"]
+[ext_resource type="Script" path="res://Scripts/Properties/InteractArea.cs" id="3_8ggi7"]
+[ext_resource type="PackedScene" uid="uid://bopfmhbrqi8et" path="res://Scenes/Properties/ParentCanBeInteracted.tscn" id="4_7vvss"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3g3qn"]
+size = Vector2(4, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7hn0"]
+
+[node name="ThrowableBox" type="CharacterBody2D"]
+script = ExtResource("1_7m48i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3g3qn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_l3pvn")
+
+[node name="InteractArea" type="Area2D" parent="."]
+script = ExtResource("3_8ggi7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+shape = SubResource("CircleShape2D_a7hn0")
+
+[node name="ParentCanBeInteracted" parent="InteractArea" instance=ExtResource("4_7vvss")]
