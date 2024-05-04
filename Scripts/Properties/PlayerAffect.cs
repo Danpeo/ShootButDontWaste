@@ -2,7 +2,7 @@ using Platformer.Scripts.Entities;
 
 namespace Platformer.Scripts.Properties;
 
-public static class AffectPlayer
+public static class PlayerAffect
 {
     public static void Damage(Player player, int damage)
     {

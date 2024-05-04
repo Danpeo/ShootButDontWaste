@@ -1,13 +1,75 @@
-[gd_scene load_steps=7 format=3 uid="uid://caiipt70dcaui"]
+[gd_scene load_steps=21 format=3 uid="uid://caiipt70dcaui"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player.cs" id="1_dqshf"]
 [ext_resource type="PackedScene" uid="uid://bpr334qcbkpmv" path="res://Scenes/Animators/PlayerAnimatedSprite.tscn" id="4_0x5pd"]
+[ext_resource type="SpriteFrames" uid="uid://cknd1l7iv70u6" path="res://Scenes/Animators/ArmedPlayerSpriteFrames.tres" id="5_8uavy"]
 [ext_resource type="PackedScene" uid="uid://cqy3hcf8f124" path="res://Scenes/Properties/OrientedToDirection.tscn" id="5_l8eil"]
+[ext_resource type="Texture2D" uid="uid://cuh24s7rjwmis" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_48.png" id="6_8e7fe"]
+[ext_resource type="Texture2D" uid="uid://b3l807gjfob7m" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun1.png" id="6_w3plq"]
+[ext_resource type="Texture2D" uid="uid://bisbhhcn8pjw1" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun2.png" id="7_wciwa"]
+[ext_resource type="Texture2D" uid="uid://nvj7ww2qgjl" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_49.png" id="7_yykgu"]
+[ext_resource type="Texture2D" uid="uid://bx5dmbces1hyx" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun3.png" id="8_iuvbs"]
+[ext_resource type="Texture2D" uid="uid://cr1pgoru1xmb5" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_50.png" id="8_ujpm2"]
+[ext_resource type="Texture2D" uid="uid://bykb2ml7ssit6" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_51.png" id="9_63da3"]
+[ext_resource type="Texture2D" uid="uid://slfrvbjal4n3" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun4.png" id="9_b32cb"]
+[ext_resource type="Texture2D" uid="uid://d3vbl6in6hrox" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun5.png" id="10_i6pdr"]
+[ext_resource type="Texture2D" uid="uid://cuq5dbs4s03r8" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun6.png" id="11_kktja"]
+[ext_resource type="Texture2D" uid="uid://cfgw6v6jmwq5b" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun7.png" id="12_0ganw"]
+[ext_resource type="Texture2D" uid="uid://bu1cwjckon2r1" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun8.png" id="13_yr84d"]
 [ext_resource type="PackedScene" uid="uid://bl77r6l1d24rk" path="res://Scenes/Properties/Ammo.tscn" id="19_d6fbc"]
 [ext_resource type="PackedScene" uid="uid://blpuiro8pnb6p" path="res://Scenes/Entities/CanShoot.tscn" id="20_kqwes"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ir0dh"]
 size = Vector2(5, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0pd7a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_8e7fe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yykgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ujpm2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_63da3")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_w3plq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wciwa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_iuvbs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_b32cb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_i6pdr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_kktja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0ganw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_yr84d")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 16.0
+}]
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_dqshf")
@@ -29,5 +91,14 @@ unique_name_in_owner = true
 position = Vector2(5, 1)
 
 [node name="PlayerAnimatedSprite" parent="." instance=ExtResource("4_0x5pd")]
+sprite_frames = ExtResource("5_8uavy")
+animation = &"Idle"
+autoplay = "Idle"
 
 [node name="OrientedToDirection" parent="." instance=ExtResource("5_l8eil")]
+
+[node name="PlayerAnimatedSpriteUnarmed" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+sprite_frames = SubResource("SpriteFrames_0pd7a")
+animation = &"Idle"

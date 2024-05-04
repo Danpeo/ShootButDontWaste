@@ -1,0 +1,103 @@
+[gd_resource type="SpriteFrames" load_steps=19 format=3 uid="uid://c10vuaw6c1hxn"]
+
+[ext_resource type="Texture2D" uid="uid://33l03wjon0o7" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_79.png" id="1_p8yyf"]
+[ext_resource type="Texture2D" uid="uid://fy7e7kbiyq1m" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_02.png" id="2_1phfk"]
+[ext_resource type="Texture2D" uid="uid://cuh24s7rjwmis" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_48.png" id="3_nbriw"]
+[ext_resource type="Texture2D" uid="uid://nvj7ww2qgjl" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_49.png" id="4_nkcop"]
+[ext_resource type="Texture2D" uid="uid://cr1pgoru1xmb5" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_50.png" id="5_intjl"]
+[ext_resource type="Texture2D" uid="uid://bykb2ml7ssit6" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_51.png" id="6_jrmeq"]
+[ext_resource type="Texture2D" uid="uid://drfrdx6fvuxv8" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_62.png" id="7_hwq8c"]
+[ext_resource type="Texture2D" uid="uid://db1koagw8q02b" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_63.png" id="8_mverw"]
+[ext_resource type="Texture2D" uid="uid://wabbrf03o13e" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_64.png" id="9_36uot"]
+[ext_resource type="Texture2D" uid="uid://deje7q1ihy5jq" path="res://GameAssets/Paper-Pixels-8x8/player/sprite_65.png" id="10_lwvto"]
+[ext_resource type="Texture2D" uid="uid://b3l807gjfob7m" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun1.png" id="11_rg67t"]
+[ext_resource type="Texture2D" uid="uid://bisbhhcn8pjw1" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun2.png" id="12_r08pg"]
+[ext_resource type="Texture2D" uid="uid://bx5dmbces1hyx" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun3.png" id="13_y4gpe"]
+[ext_resource type="Texture2D" uid="uid://slfrvbjal4n3" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun4.png" id="14_psc7h"]
+[ext_resource type="Texture2D" uid="uid://d3vbl6in6hrox" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun5.png" id="15_hce23"]
+[ext_resource type="Texture2D" uid="uid://cuq5dbs4s03r8" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun6.png" id="16_pvvsh"]
+[ext_resource type="Texture2D" uid="uid://cfgw6v6jmwq5b" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun7.png" id="17_kgkjy"]
+[ext_resource type="Texture2D" uid="uid://bu1cwjckon2r1" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun8.png" id="18_noe3q"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_p8yyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_1phfk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_p8yyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_1phfk")
+}],
+"loop": true,
+"name": &"Hit",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_nbriw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nkcop")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_intjl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_jrmeq")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_hwq8c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mverw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_36uot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_lwvto")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_rg67t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_r08pg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_y4gpe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_psc7h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_hce23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_pvvsh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_kgkjy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_noe3q")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 16.0
+}]

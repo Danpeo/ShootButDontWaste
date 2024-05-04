@@ -56,7 +56,7 @@ public partial class Worm : CharacterBody2D, IEnemy
     public void Patrol()
     {
         _currentTargetPosition = _movingToPatrolPoint ? _targetPatrolPointPosition : _startingPosition;
-        PlayAnimaton(WormAnim.Move);
+        PlayAnimation(WormAnim.Move);
 
         MoveToTarget(_currentTargetPosition);
     }
@@ -64,14 +64,14 @@ public partial class Worm : CharacterBody2D, IEnemy
     public void PursuePlayer()
     {
         _currentTargetPosition = _spotArea.Player!.Position;
-        PlayAnimaton(WormAnim.AgroMove);
+        PlayAnimation(WormAnim.AgroMove);
         MoveToTarget(_currentTargetPosition);
     }
 
     public bool IsPlayerInSpotArea() =>
         _spotArea.Player != null;
 
-    public void PlayAnimaton(WormAnim animation)
+    public void PlayAnimation(WormAnim animation)
     {
         _animatedSprite2D.Play(new WormAnimation(animation).Name);
     }
@@ -87,7 +87,7 @@ public partial class Worm : CharacterBody2D, IEnemy
     public void Stop()
     {
         Velocity = Vector2.Zero;
-        PlayAnimaton(WormAnim.Idle);
+        PlayAnimation(WormAnim.Idle);
     }
 
     public void OnSpottedPlayer(Action action)

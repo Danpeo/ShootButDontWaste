@@ -1,4 +1,3 @@
-using Platformer.Scripts.Constants.Animations;
 using Platformer.Scripts.Entities;
 
 namespace Platformer.Scripts.State.PlayerStates;
@@ -17,4 +16,11 @@ public class PlayerStateHoldObject : PlayerStateIdle
     {
         base.PhysicsProcess(delta);
     }
+
+    /*
+    public override void Exit()
+    {
+        Player.SetSpriteFrames();
+    }
+*/
 }

@@ -27,8 +27,9 @@ public class PlayerStateIdle : PlayerState
             Fsm.Set<PlayerStateMove>();
         }
 
-        string animatin = Player.IsHoldingObject() ? PlayerAnimation.Hit : PlayerAnimation.Idle;
-        
-        TryPlayJump(animatin);
+        //string animatin = Player.IsHoldingObject() ? PlayerAnimation.Hit : PlayerAnimation.Idle;
+       // string animatin = PlayerAnimation.Idle;
+
+        TryPlayJump(PlayerAnim.Idle);
     }
 }

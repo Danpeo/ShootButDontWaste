@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://ch2wyc5c786ma"]
+
+[ext_resource type="Script" path="res://Scripts/Entities/Enemies/Mushroom.cs" id="1_dg58x"]
+[ext_resource type="Texture2D" uid="uid://vanb4ncnuvj0" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies039.png" id="2_sm41q"]
+[ext_resource type="Texture2D" uid="uid://bfdgw7islcm4d" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies044.png" id="3_hje3l"]
+[ext_resource type="Texture2D" uid="uid://ogtpae8077nx" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies040.png" id="4_xk5uw"]
+[ext_resource type="Texture2D" uid="uid://c77y81cj8l1cg" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies041.png" id="5_07v1g"]
+[ext_resource type="Texture2D" uid="uid://c4ict833ctlcf" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies042.png" id="6_61rms"]
+[ext_resource type="Texture2D" uid="uid://crojtwejmuvir" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies043.png" id="7_t8xi2"]
+[ext_resource type="PackedScene" uid="uid://c01ljmhepj50h" path="res://Scenes/Properties/Health.tscn" id="8_784a7"]
+[ext_resource type="PackedScene" uid="uid://blpuiro8pnb6p" path="res://Scenes/Entities/CanShoot.tscn" id="9_qro5y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qpjx4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sm41q")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_hje3l")
+}],
+"loop": true,
+"name": &"Shoot",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_xk5uw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_07v1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_61rms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_t8xi2")
+}],
+"loop": true,
+"name": &"Showup",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_idyax"]
+size = Vector2(6, 6)
+
+[node name="Mushroom" type="CharacterBody2D"]
+script = ExtResource("1_dg58x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_qpjx4")
+animation = &"Shoot"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_idyax")
+
+[node name="Health" parent="." instance=ExtResource("8_784a7")]
+Current = 2
+Max = 2
+
+[node name="CanShoot" parent="." instance=ExtResource("9_qro5y")]
+WeaponSceneName = "MushroomWeapon"
+Cooldown = 0.5
+
+[node name="MushroomWeapon" type="Node2D" parent="CanShoot"]
+unique_name_in_owner = true
+position = Vector2(4, 2)

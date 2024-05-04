@@ -1,5 +1,6 @@
 using Godot;
 using Platformer.Scripts.Constants;
+using Platformer.Scripts.Constants.Animations;
 using Platformer.Scripts.Entities;
 using Platformer.Scripts.Utils;
 
@@ -23,9 +24,9 @@ public class PlayerState : FsmState
     {
     }
 
-    protected void TryPlayJump(string stateAnimation)
+    protected void TryPlayJump(PlayerAnim stateAnimation)
     {
-        Player.PlayAnimation(Player.Velocity.Y < 0 ? InputBindings.Jump : stateAnimation);
+        Player.PlayAnimation(Player.Velocity.Y < 0 ? PlayerAnim.Jump : stateAnimation);
     }
 
     protected void TrySetJumpState()

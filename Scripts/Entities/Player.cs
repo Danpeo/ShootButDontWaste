@@ -23,6 +23,14 @@ public partial class Player : CharacterBody2D
     public IThrowable? CurrentThrowableObject { get; set; }
 
     private AnimatedSprite2D _playerAnimator = null!;
+    private AnimatedSprite2D _playerAnimatorUnarmed = null!;
+
+    private SpriteFrames _armedSpriteFrames =
+        GD.Load<SpriteFrames>("res://Scenes/Animators/ArmedPlayerSpriteFrames.tres");
+
+    private SpriteFrames _unarmedSpriteFrames =
+        GD.Load<SpriteFrames>("res://Scenes/Animators/UnarmedPlayerSpriteFrames.tres");
+    
     public float Direction { get; internal set; }
     private CanShoot _canShoot = null!;
     private OrientedToDirection _orientedToDirection = null!;
@@ -33,6 +41,7 @@ public partial class Player : CharacterBody2D
         _orientedToDirection = GetNode<OrientedToDirection>("OrientedToDirection");
 
         _playerAnimator = GetNode<AnimatedSprite2D>("%PlayerAnimatedSprite");
+        //_playerAnimatorUnarmed = GetNode<AnimatedSprite2D>("PlayerAnimatedSpriteUnarmed");
         Ammo = GetNode<Ammo>("%PlayerAmmo");
         Ammo.OnAmmoLessThanZero += die;
         _canShoot = GetNode<CanShoot>("%PlayerCanShoot");
@@ -58,12 +67,13 @@ public partial class Player : CharacterBody2D
 
         MoveAndSlide();
         _fsm.PhysicsProcess(delta);
+        Debug.Print($"ROTATION {Rotation}");
     }
 
     public void OnAmmoReducedByDamage(Action action) =>
         Ammo.OnReducedByDamage += action;
-    
-    public bool IsHoldingObject() => 
+
+    public bool IsHoldingObject() =>
         CurrentThrowableObject != null;
 
     public void Move() =>
@@ -73,14 +83,17 @@ public partial class Player : CharacterBody2D
         Velocity = Velocity with { Y = JumpSpeed };
 
     public void Shoot() =>
-        _canShoot.Shoot(Rotation, Ammo.Current);
+        _canShoot.Shoot(Scale.Y, Ammo.Current);
 
-    public void PlayAnimation(StringName animationName) =>
-        _playerAnimator.Play(animationName);
-
+    public void PlayAnimation(PlayerAnim animation)
+    {
+        SetSpriteFrames();
+        _playerAnimator.Play(new PlayerAnimation(animation).Name);
+    }
+    
     public void Hit(float frameFreezeDuration)
     {
-        _playerAnimator.Play(PlayerAnimation.Hit);
+        PlayAnimation(PlayerAnim.Hit);
         const float frameFreezeDurationMultiplier = 1.5f;
         const float frameFreezeTiemScale = 0.05f;
         this.Autoload<FrameFreeze>("FrameFreeze")
@@ -107,5 +120,10 @@ public partial class Player : CharacterBody2D
         _fsm.Add(new PlayerStateHit(_fsm, this));
         _fsm.Add(new PlayerStateShoot(_fsm, this));
         _fsm.Set<PlayerStateIdle>();
+    }
+
+    private void SetSpriteFrames()
+    {
+        _playerAnimator.SpriteFrames = IsHoldingObject() ? _unarmedSpriteFrames : _armedSpriteFrames;
     }
 }

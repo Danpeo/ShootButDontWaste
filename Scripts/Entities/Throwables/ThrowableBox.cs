@@ -1,8 +1,10 @@
 using Godot;
+using Platformer.Scripts.Entities.Enemies;
 using Platformer.Scripts.Properties;
 using Platformer.Scripts.Properties.Interfaces;
 using Platformer.Scripts.State;
 using Platformer.Scripts.State.ThrowableStates;
+using Platformer.Scripts.Utils;
 
 namespace Platformer.Scripts.Entities.Throwables;
 
@@ -11,6 +13,7 @@ public partial class ThrowableBox : CharacterBody2D, IThrowable
     [Export] private float _xVelocity = 200f;
     [Export] private float _yVelocity = -80f;
     [Export] private float _holdingOffset = 5f;
+    [Export] private int _damage = 2;
     public bool IsHeld { get; private set; }
     private InteractArea _pickableArea = null!;
     private Vector2 _originalPosition;
@@ -35,7 +38,15 @@ public partial class ThrowableBox : CharacterBody2D, IThrowable
         Vector2 currVelocity = Velocity;
         currVelocity.Y += World.GetGravity() * (float)delta;
         Velocity = currVelocity;
-        MoveAndSlide();
+        
+        var collision = MoveAndCollide(Velocity * (float)delta);
+        if (collision != null)
+        {
+            if (collision.GetCollider() is IEnemy enemy)
+            {
+                EnemyAffect.Damage(enemy, _damage);
+            }
+        }
 
         if (IsOnFloor())
         {

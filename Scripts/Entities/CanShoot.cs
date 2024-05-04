@@ -25,13 +25,13 @@ public partial class CanShoot : Node2D
         _shootTimer.Timeout += () => _canShoot = true;
     }
 
-    public void Shoot(float rotation, int ammo)
+    public void Shoot(float direction, int ammo)
     {
         if (!_canShoot || ammo <= 0)
             return;
 
         var bullet = (Bullet)_bulletScene.Instantiate();
-        bullet.Construct(GetNode<Node2D>($"%{WeaponSceneName}").GlobalPosition, rotation);
+        bullet.Construct(GetNode<Node2D>($"%{WeaponSceneName}").GlobalPosition, direction);
         GetTree().Root.AddChild(bullet);
         _canShoot = false;
         _shootTimer.Start();

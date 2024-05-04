@@ -25,7 +25,7 @@ public partial class ParentCanDamageOnTouch : Node
                 if (body is Player player)
                 {
                     _player = player;
-                    AffectPlayer.Damage(player, Damage);
+                    PlayerAffect.Damage(player, Damage);
                     _canDamage = false;
                     _damageTimer.Start();
                 }
@@ -45,7 +45,7 @@ public partial class ParentCanDamageOnTouch : Node
     {
         if (_canDamage && _player != null && _area.OverlapsBody(_player))
         {
-            AffectPlayer.Damage(_player, Damage);
+            PlayerAffect.Damage(_player, Damage);
             _canDamage = false;
             _damageTimer.Start();
         }

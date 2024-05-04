@@ -13,7 +13,7 @@ public class PlayerStateJump : PlayerState
     {
         base.Enter();
 
-        Player.PlayAnimation(PlayerAnimation.Jump);
+        Player.PlayAnimation(PlayerAnim.Jump);
     }
 
     public override void PhysicsProcess(double delta)

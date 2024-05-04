@@ -14,13 +14,13 @@ public class PlayerStateMove : PlayerState
     {
         base.Enter();
 
-        Player.PlayAnimation(PlayerAnimation.Run);
+        Player.PlayAnimation(PlayerAnim.Run);
     }
 
     public override void PhysicsProcess(double delta)
     {
         TrySetJumpState();
-        TryPlayJump(PlayerAnimation.Run);
+        TryPlayJump(PlayerAnim.Run);
         TrySetShootState();
 
         Player.Move();

@@ -13,12 +13,12 @@ public class PlayerStateShoot : PlayerState
 
     public override void Enter()
     {
-        Player.PlayAnimation(PlayerAnimation.Shoot);
+        Player.PlayAnimation(PlayerAnim.Shoot);
     }
 
     public override void PhysicsProcess(double delta)
     {
-        if (!InputExt.IsActionHolding(InputBindings.Shoot))
+        if (!InputExt.IsActionHolding(InputBindings.Shoot) || Player.IsHoldingObject())
         {
             Fsm.Set<PlayerStateIdle>();
             return;
