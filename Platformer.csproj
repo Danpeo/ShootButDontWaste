@@ -1,10 +1,11 @@
 <Project Sdk="Godot.NET.Sdk/4.2.1">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net7.0</TargetFramework>
     <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'ios' ">net8.0</TargetFramework>
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <Nullable>enable</Nullable>
+    <TargetFrameworks>net6.0;net8.0;net7.0</TargetFrameworks>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Chickensoft.AutoInject" Version="1.5.0" />
@@ -16,5 +17,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="DVar.GodotSharp.Extensions\**" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
+    <PackageReference Include="DVar.RandCreds" Version="1.1.2" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+    <PackageReference Include="DVar.RandCreds" Version="1.1.2" />
   </ItemGroup>
 </Project>
