@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ch2wyc5c786ma"]
+[gd_scene load_steps=16 format=3 uid="uid://ch2wyc5c786ma"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Enemies/Mushroom.cs" id="1_dg58x"]
 [ext_resource type="Texture2D" uid="uid://vanb4ncnuvj0" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies039.png" id="2_sm41q"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://crojtwejmuvir" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies043.png" id="7_t8xi2"]
 [ext_resource type="PackedScene" uid="uid://c01ljmhepj50h" path="res://Scenes/Properties/Health.tscn" id="8_784a7"]
 [ext_resource type="PackedScene" uid="uid://blpuiro8pnb6p" path="res://Scenes/Entities/CanShoot.tscn" id="9_qro5y"]
+[ext_resource type="PackedScene" uid="uid://2tw2dty2u5au" path="res://Scenes/Properties/ParentCanDamageOnTouch.tscn" id="10_yf15v"]
+[ext_resource type="Script" path="res://Scripts/Entities/Areas/SpotArea.cs" id="11_ll08y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qpjx4"]
 animations = [{
@@ -44,17 +46,42 @@ animations = [{
 "loop": true,
 "name": &"Showup",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_t8xi2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_61rms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_07v1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xk5uw")
+}],
+"loop": false,
+"name": &"Squash",
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_idyax"]
-size = Vector2(6, 6)
+size = Vector2(4, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e81sj"]
+size = Vector2(6, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_knmtw"]
+size = Vector2(63, 6)
 
 [node name="Mushroom" type="CharacterBody2D"]
 script = ExtResource("1_dg58x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qpjx4")
-animation = &"Shoot"
+animation = &"Squash"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -71,3 +98,18 @@ Cooldown = 0.5
 [node name="MushroomWeapon" type="Node2D" parent="CanShoot"]
 unique_name_in_owner = true
 position = Vector2(4, 2)
+
+[node name="DamageArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_e81sj")
+
+[node name="ParentCanDamageOnTouch" parent="DamageArea" instance=ExtResource("10_yf15v")]
+
+[node name="SpotArea" type="Area2D" parent="."]
+script = ExtResource("11_ll08y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpotArea"]
+position = Vector2(28.5, 1)
+shape = SubResource("RectangleShape2D_knmtw")

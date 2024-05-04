@@ -12,4 +12,11 @@ public static class NodeExtensions
 
     public static TNode Autoload<TNode>(this Node node, string name) where TNode : class =>
         node.GetNode<TNode>($"/root/{name}");
+
+    public static void ApplyGravity(this CharacterBody2D characterBody, double delta)
+    {
+        Vector2 currVelocity = characterBody.Velocity;
+        currVelocity.Y += World.GetGravity() * (float)delta;
+        characterBody.Velocity = currVelocity;
+    }
 }

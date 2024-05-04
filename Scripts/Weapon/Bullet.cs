@@ -14,7 +14,7 @@ public partial class Bullet : CharacterBody2D, IShootable
     public void Construct(Vector2 position, float direction)
     {
         Position = position;
-        Velocity = new Vector2(Speed * direction, 0);
+        Velocity = new Vector2(Speed, 0).Rotated(direction);
     }
 
     public override void _PhysicsProcess(double delta)

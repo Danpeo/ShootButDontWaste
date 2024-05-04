@@ -26,7 +26,7 @@ public partial class Worm : CharacterBody2D, IEnemy
 
     private OrientedToDirection _orientedToDirection = null!;
     private SpotArea _spotArea = null!;
-    private AnimatedSprite2D _animatedSprite2D = null!;
+    private AnimatedSprite2D _animatedSprite = null!;
     private Vector2 _startingPosition;
     private Vector2 _targetPatrolPointPosition;
     private Vector2 _currentTargetPosition;
@@ -40,7 +40,7 @@ public partial class Worm : CharacterBody2D, IEnemy
 
         _orientedToDirection = GetNode<OrientedToDirection>("OrientedToDirection");
         _spotArea = GetNode<SpotArea>("SpotArea");
-        _animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
+        _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         _startingPosition = Position;
         _targetPatrolPointPosition = new Vector2(_startingPosition.X + PatrolDistance, _startingPosition.Y);
         Exclamation = GetNode<Exclamation>("Exclamation");
@@ -73,7 +73,7 @@ public partial class Worm : CharacterBody2D, IEnemy
 
     public void PlayAnimation(WormAnim animation)
     {
-        _animatedSprite2D.Play(new WormAnimation(animation).Name);
+        _animatedSprite.Play(WormAnimation.Value(animation));
     }
 
     private void MoveToTarget(Vector2 target)

@@ -1,4 +1,4 @@
-using Platformer.Scripts.Constants.Animations;
+using Platformer.Scripts.Animations;
 using Platformer.Scripts.Entities;
 
 namespace Platformer.Scripts.State.PlayerStates;

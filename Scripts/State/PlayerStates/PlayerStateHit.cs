@@ -1,4 +1,3 @@
-using Godot;
 using Platformer.Scripts.Constants.Times;
 using Platformer.Scripts.Entities;
 using Platformer.Scripts.Utils;

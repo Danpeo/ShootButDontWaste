@@ -11,13 +11,11 @@ public enum WormAnim
     AgroMove
 }
 
-public class WormAnimation : ValueObject
+public class WormAnimation
 {
-    public string Name { get; }
-
-    public WormAnimation(WormAnim animation)
+    public static string Value(WormAnim animation)
     {
-        Name = animation switch
+        return animation switch
         {
             WormAnim.Idle => "Idle",
             WormAnim.Attack => "Attack",
@@ -25,10 +23,5 @@ public class WormAnimation : ValueObject
             WormAnim.AgroMove => "AgroMove",
             _ => "Idle"
         };
-    }
-
-    public override IEnumerable<object> GetAtomicValues()
-    {
-        yield return Name;
     }
 }

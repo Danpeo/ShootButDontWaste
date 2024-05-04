@@ -1,8 +1,8 @@
 using System;
 using System.Diagnostics;
 using Godot;
+using Platformer.Scripts.Animations;
 using Platformer.Scripts.Constants;
-using Platformer.Scripts.Constants.Animations;
 using Platformer.Scripts.Effects;
 using Platformer.Scripts.Properties;
 using Platformer.Scripts.Properties.Interfaces;
@@ -30,7 +30,7 @@ public partial class Player : CharacterBody2D
 
     private SpriteFrames _unarmedSpriteFrames =
         GD.Load<SpriteFrames>("res://Scenes/Animators/UnarmedPlayerSpriteFrames.tres");
-    
+
     public float Direction { get; internal set; }
     private CanShoot _canShoot = null!;
     private OrientedToDirection _orientedToDirection = null!;
@@ -47,7 +47,6 @@ public partial class Player : CharacterBody2D
         _canShoot = GetNode<CanShoot>("%PlayerCanShoot");
         _canShoot.OnShooted += shots => Ammo.ReduceByShooting(shots);
         AddStates();
-        return;
 
         void die()
         {
@@ -66,8 +65,9 @@ public partial class Player : CharacterBody2D
         Velocity = currVelocity;
 
         MoveAndSlide();
+        CheckCollisions();
+
         _fsm.PhysicsProcess(delta);
-        Debug.Print($"ROTATION {Rotation}");
     }
 
     public void OnAmmoReducedByDamage(Action action) =>
@@ -83,14 +83,14 @@ public partial class Player : CharacterBody2D
         Velocity = Velocity with { Y = JumpSpeed };
 
     public void Shoot() =>
-        _canShoot.Shoot(Scale.Y, Ammo.Current);
+        _canShoot.Shoot(Rotation, Ammo.Current);
 
     public void PlayAnimation(PlayerAnim animation)
     {
         SetSpriteFrames();
-        _playerAnimator.Play(new PlayerAnimation(animation).Name);
+        _playerAnimator.Play(PlayerAnimation.Value(animation));
     }
-    
+
     public void Hit(float frameFreezeDuration)
     {
         PlayAnimation(PlayerAnim.Hit);
@@ -120,6 +120,23 @@ public partial class Player : CharacterBody2D
         _fsm.Add(new PlayerStateHit(_fsm, this));
         _fsm.Add(new PlayerStateShoot(_fsm, this));
         _fsm.Set<PlayerStateIdle>();
+    }
+
+    private void CheckCollisions()
+    {
+        for (int i = 0; i < GetSlideCollisionCount(); i++)
+        {
+            KinematicCollision2D collision = GetSlideCollision(i);
+            const float error = 0.1f;
+            if (collision.GetCollider() is ISquashable squashable)
+            {
+                // We check that we are hitting it from above.
+                if (Vector2.Up.Dot(collision.GetNormal()) > error)
+                {
+                    squashable.GetSquashed();
+                }
+            }
+        }
     }
 
     private void SetSpriteFrames()

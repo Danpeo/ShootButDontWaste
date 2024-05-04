@@ -1,6 +1,6 @@
 using Godot;
+using Platformer.Scripts.Animations;
 using Platformer.Scripts.Constants;
-using Platformer.Scripts.Constants.Animations;
 using Platformer.Scripts.Entities;
 using Platformer.Scripts.Utils;
 
