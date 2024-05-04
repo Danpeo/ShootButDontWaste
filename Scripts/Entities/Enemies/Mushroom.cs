@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using Godot;
 using Platformer.Scripts.Animations;
 using Platformer.Scripts.Constants;
@@ -67,7 +68,9 @@ public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable
 
         var random = new Random();
         bool randomBoolValue = random.Next(0, 2) == 0;
+
         int direction = randomBoolValue ? -1 : 1;
+        
         Velocity = new Vector2(direction * 40f, -180f);
 
         PlayAnimation(MushroomAnim.Squash);
