@@ -16,6 +16,23 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("7_t8xi2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_61rms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_07v1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_xk5uw")
+}],
+"loop": false,
+"name": &"Hide",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_sm41q")
 }],
 "loop": true,
@@ -43,7 +60,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_t8xi2")
 }],
-"loop": true,
+"loop": false,
 "name": &"Showup",
 "speed": 8.0
 }, {
@@ -79,9 +96,7 @@ script = ExtResource("1_dg58x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qpjx4")
-animation = &"Squash"
-frame = 3
-frame_progress = 1.0
+animation = &"Showup"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -92,8 +107,9 @@ Current = 2
 Max = 2
 
 [node name="CanShoot" parent="." instance=ExtResource("9_qro5y")]
+BulletName = "MushroomBullet"
 WeaponSceneName = "MushroomWeapon"
-Cooldown = 0.5
+Cooldown = 1.0
 
 [node name="MushroomWeapon" type="Node2D" parent="CanShoot"]
 unique_name_in_owner = true

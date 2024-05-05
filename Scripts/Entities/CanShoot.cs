@@ -30,7 +30,7 @@ public partial class CanShoot : Node2D
         if (!_canShoot || ammo <= 0)
             return;
 
-        var bullet = (Bullet)_bulletScene.Instantiate();
+        var bullet = (BaseBullet)_bulletScene.Instantiate();
         bullet.Construct(GetNode<Node2D>($"%{WeaponSceneName}").GlobalPosition, direction);
         GetTree().Root.AddChild(bullet);
         _canShoot = false;

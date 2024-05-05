@@ -1,20 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqjjr0n1pyicc"]
 
-[ext_resource type="Script" path="res://Scripts/Weapon/Bullet.cs" id="1_617jt"]
-[ext_resource type="Texture2D" uid="uid://slnbennt2hxi" path="res://GameAssets/Weapon/bullet.png" id="2_hfler"]
+[ext_resource type="Script" path="res://Scripts/Weapon/PlayerBullet.cs" id="1_v7vk2"]
+[ext_resource type="Texture2D" uid="uid://slnbennt2hxi" path="res://GameAssets/Weapon/bullet.png" id="2_lnc30"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kv0vs"]
 size = Vector2(1, 1)
 
-[node name="Bullet" type="CharacterBody2D"]
+[node name="PlayerBullet" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("1_617jt")
-Speed = 120.0
+script = ExtResource("1_v7vk2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_kv0vs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_hfler")
+texture = ExtResource("2_lnc30")

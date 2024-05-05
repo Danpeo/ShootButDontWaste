@@ -84,6 +84,7 @@ unique_name_in_owner = true
 
 [node name="PlayerCanShoot" parent="." instance=ExtResource("20_kqwes")]
 unique_name_in_owner = true
+BulletName = "PlayerBullet"
 WeaponSceneName = "PlayerGun"
 
 [node name="PlayerGun" type="Node2D" parent="PlayerCanShoot"]
