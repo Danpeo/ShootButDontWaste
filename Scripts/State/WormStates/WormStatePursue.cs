@@ -2,12 +2,8 @@ using Platformer.Scripts.Entities.Enemies;
 
 namespace Platformer.Scripts.State.WormStates;
 
-public class WormStatePursue : WormState
+public class WormStatePursue(Fsm fsm, Worm worm) : WormState(fsm, worm)
 {
-    public WormStatePursue(Fsm fsm, Worm worm) : base(fsm, worm)
-    {
-    }
-
     public override void Enter()
     {
     }

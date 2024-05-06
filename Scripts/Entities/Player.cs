@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using Godot;
 using Platformer.Scripts.Animations;
 using Platformer.Scripts.Constants;

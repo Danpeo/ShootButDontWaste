@@ -5,9 +5,8 @@ namespace Platformer.Scripts.Properties;
 
 public partial class Health : Node
 {
-    private int _current = 1;
+    [Export] private int _current = 1;
 
-    [Export]
     public int Current
     {
         get => _current;
@@ -31,9 +30,11 @@ public partial class Health : Node
     [Export] public int Max { get; set; } = 1;
 
     public Action? OnHealthIsZero { get; set; }
+    public Action? OnDamaged { get; set; }
 
     public void Reduce(int damage)
     {
         Current -= damage;
+        OnDamaged?.Invoke();
     }
 }

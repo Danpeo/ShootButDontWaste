@@ -6,7 +6,8 @@ public enum MushroomAnim
     Shoot,
     Showup,
     Hide,
-    Squash
+    Squash,
+    Hit
 }
 
 public static class MushroomAnimation
@@ -20,6 +21,7 @@ public static class MushroomAnimation
             MushroomAnim.Showup => "Showup",
             MushroomAnim.Hide => "Hide",
             MushroomAnim.Squash => "Squash",
+            MushroomAnim.Hit => "Hit",
             _ => "Idle"
         };
     }

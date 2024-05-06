@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using Platformer.Scripts.Utils.Types;
-
 namespace Platformer.Scripts.Animations;
 
 public enum WormAnim
@@ -8,10 +5,11 @@ public enum WormAnim
     Idle,
     Attack,
     Move,
-    AgroMove
+    AgroMove,
+    Hit
 }
 
-public class WormAnimation
+public static class WormAnimation
 {
     public static string Value(WormAnim animation)
     {
@@ -21,6 +19,7 @@ public class WormAnimation
             WormAnim.Attack => "Attack",
             WormAnim.Move => "Move",
             WormAnim.AgroMove => "AgroMove",
+            WormAnim.Hit => "Hit",
             _ => "Idle"
         };
     }

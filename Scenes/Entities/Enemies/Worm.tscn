@@ -51,6 +51,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("3_pa7is")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pa7is")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pa7is")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_pa7is")
+}],
+"loop": true,
+"name": &"Hit",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("4_yg0u6")
 }, {
 "duration": 1.0,
@@ -95,9 +112,7 @@ ChangeOfDirectionDistance = 5.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_yx7e1")
-animation = &"AgroMove"
-frame = 2
-frame_progress = 0.0356356
+animation = &"Hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -113,7 +128,7 @@ shape = SubResource("CircleShape2D_m3kqq")
 
 [node name="WormHealth" parent="." instance=ExtResource("12_bxr7j")]
 unique_name_in_owner = true
-Current = 2
+_current = 2
 Max = 2
 
 [node name="OrientedToDirection" parent="." instance=ExtResource("13_albiy")]

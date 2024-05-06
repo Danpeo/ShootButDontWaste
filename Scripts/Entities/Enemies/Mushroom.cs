@@ -1,5 +1,4 @@
 using System;
-using DVar.RandCreds;
 using Godot;
 using Platformer.Scripts.Animations;
 using Platformer.Scripts.Constants;
@@ -13,7 +12,7 @@ using Platformer.Scripts.Utils;
 
 namespace Platformer.Scripts.Entities.Enemies;
 
-public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable
+public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable, IHittableEnemy
 {
     [Export] private bool _flipped = true;
     public Health Health { get; set; } = null!;
@@ -27,16 +26,14 @@ public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable
     public override void _Ready()
     {
         Health = GetNode<Health>("Health");
+        Health.OnHealthIsZero += GetSquashed;
+
         _canShoot = GetNode<CanShoot>("CanShoot");
         _spotArea = GetNode<SpotArea>("SpotArea");
 
-        _spotArea.OnSpotted += () =>
-        {
-            Showup();
-            _canShoot.Shoot(Rotation, int.MaxValue);
-        };
+        _spotArea.OnSpotted += Showup;
 
-        _spotArea.OnLosed += () => { Idle(); };
+        _spotArea.OnLosed += Idle;
 
         _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
         _animatedSprite.Play("Shoot");
@@ -68,27 +65,25 @@ public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable
     {
         this.ApplyGravity(delta);
         MoveAndCollide(Velocity * (float)delta);
-        
+
         _fsm.PhysicsProcess(delta);
-        
+
         if (_shoot)
         {
             Shoot();
         }
     }
 
-    public void OnSpottedPlayer(Action action)
-    {
-        _spotArea.OnSpotted += () => { action.Invoke(); };
-    }
+    public void OnSpottedPlayer(Action action) => _spotArea.OnSpotted += () => { action.Invoke(); };
 
-    public void OnLosedPlayer(Action action)
-    {
-        _spotArea.OnLosed += () => { action.Invoke(); };
-    }
+    public void OnLosedPlayer(Action action) => _spotArea.OnLosed += () => { action.Invoke(); };
+
+    public void OnHeatlhDamaged(Action action) =>
+        Health.OnDamaged += action;
 
     public void Showup()
     {
+        SetCollisionDisabled(false);
         PlayAnimation(MushroomAnim.Showup);
     }
 
@@ -113,20 +108,31 @@ public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable
     private void PlayAnimation(MushroomAnim animation) =>
         _animatedSprite.Play(MushroomAnimation.Value(animation));
 
+    public void Hit()
+    {
+        SetCollisionDisabled(true);
+        PlayAnimation(MushroomAnim.Hit);
+        FrameFreeze();
+        this.Stun();
+    }
+
     public void GetSquashed()
     {
         SetCollisionDisabled(true);
 
+        FrameFreeze();
+
+        this.Stun();
+
+        PlayAnimation(MushroomAnim.Squash);
+    }
+
+    private void FrameFreeze()
+    {
         const float frameFreezeDuration = 0.5f;
         const float frameFreezeTiemScale = 0.05f;
         this.Autoload<FrameFreeze>("FrameFreeze")
             .Activate(frameFreezeTiemScale, frameFreezeDuration);
-
-        int direction = RandGen.Boolean() ? -1 : 1;
-
-        Velocity = new Vector2(direction * 40f, -180f);
-
-        PlayAnimation(MushroomAnim.Squash);
     }
 
     private void SetCollisionDisabled(bool disabled)
@@ -141,6 +147,7 @@ public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable
         _fsm.Add(new MushroomStateIdle(_fsm, this));
         _fsm.Add(new MushroomStateSpotPlayer(_fsm, this));
         _fsm.Add(new MushroomStateLosePlayer(_fsm, this));
+        _fsm.Add(new MushroomStateHit(_fsm, this));
         _fsm.Set<MushroomStateIdle>();
     }
 }

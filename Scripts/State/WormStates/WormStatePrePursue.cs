@@ -3,15 +3,11 @@ using Platformer.Scripts.Entities.Enemies;
 
 namespace Platformer.Scripts.State.WormStates;
 
-public class WormStatePrePursue : WormState
+public class WormStatePrePursue(Fsm fsm, Worm worm) : WormState(fsm, worm)
 {
-    public WormStatePrePursue(Fsm fsm, Worm worm) : base(fsm, worm)
-    {
-    }
-    
     public override void Enter()
     {
-        Stop(() => Fsm.Set<WormStatePursue>(), WormTime.PrePursueTime);
+        Stop(() => Fsm.Set<WormStatePursue>(), WormTime.PrePursue);
         Worm.Exclamation._Show();
     }
 

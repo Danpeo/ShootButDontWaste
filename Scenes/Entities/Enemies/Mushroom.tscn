@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ch2wyc5c786ma"]
+[gd_scene load_steps=17 format=3 uid="uid://ch2wyc5c786ma"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Enemies/Mushroom.cs" id="1_dg58x"]
 [ext_resource type="Texture2D" uid="uid://vanb4ncnuvj0" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies039.png" id="2_sm41q"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ogtpae8077nx" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies040.png" id="4_xk5uw"]
 [ext_resource type="Texture2D" uid="uid://c77y81cj8l1cg" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies041.png" id="5_07v1g"]
 [ext_resource type="Texture2D" uid="uid://c4ict833ctlcf" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies042.png" id="6_61rms"]
+[ext_resource type="Texture2D" uid="uid://dxbhne2co0sr" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies052.png" id="6_dl6k0"]
 [ext_resource type="Texture2D" uid="uid://crojtwejmuvir" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies043.png" id="7_t8xi2"]
 [ext_resource type="PackedScene" uid="uid://c01ljmhepj50h" path="res://Scenes/Properties/Health.tscn" id="8_784a7"]
 [ext_resource type="PackedScene" uid="uid://blpuiro8pnb6p" path="res://Scenes/Entities/CanShoot.tscn" id="9_qro5y"]
@@ -29,6 +30,23 @@ animations = [{
 }],
 "loop": false,
 "name": &"Hide",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_61rms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_dl6k0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_61rms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_dl6k0")
+}],
+"loop": true,
+"name": &"Hit",
 "speed": 8.0
 }, {
 "frames": [{
@@ -92,18 +110,20 @@ size = Vector2(6, 4)
 size = Vector2(63, 6)
 
 [node name="Mushroom" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_dg58x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qpjx4")
-animation = &"Showup"
+animation = &"Hit"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_idyax")
 
 [node name="Health" parent="." instance=ExtResource("8_784a7")]
-Current = 2
+_current = 2
 Max = 2
 
 [node name="CanShoot" parent="." instance=ExtResource("9_qro5y")]

@@ -1,16 +1,17 @@
 using System;
-using System.Diagnostics;
 using Godot;
 using Platformer.Scripts.Animations;
 using Platformer.Scripts.Effects;
 using Platformer.Scripts.Entities.Areas;
 using Platformer.Scripts.Properties;
+using Platformer.Scripts.Properties.Interfaces;
 using Platformer.Scripts.State;
 using Platformer.Scripts.State.WormStates;
+using Platformer.Scripts.Utils;
 
 namespace Platformer.Scripts.Entities.Enemies;
 
-public partial class Worm : CharacterBody2D, IEnemy
+public partial class Worm : CharacterBody2D, IEnemy, IHittableEnemy
 {
     [Export(PropertyHint.Range, "0,500,")] public float OriginalSpeed { get; set; } = 20f;
     [Export(PropertyHint.Range, "0,500,")] public float IncreasedSpeed { get; set; } = 30f;
@@ -47,9 +48,11 @@ public partial class Worm : CharacterBody2D, IEnemy
         _currentSpeed = OriginalSpeed;
         AddStates();
     }
-    
+
     public override void _PhysicsProcess(double delta)
     {
+        this.ApplyGravity(delta);
+        MoveAndSlide();
         _fsm.PhysicsProcess(delta);
     }
 
@@ -80,8 +83,6 @@ public partial class Worm : CharacterBody2D, IEnemy
     {
         Vector2 directionToTarget = (target - Position).Normalized();
         Velocity = directionToTarget * _currentSpeed;
-
-        MoveAndSlide();
     }
 
     public void Stop()
@@ -108,6 +109,13 @@ public partial class Worm : CharacterBody2D, IEnemy
         };
     }
 
+    private void GetStunned()
+    {
+        const float stunX = 40f;
+        const float stunY = -180f;
+        this.Stun(stunX, stunY);
+    }
+
     public bool IsAlmostAtCurrentTargetPosition() =>
         Position.DistanceTo(_currentTargetPosition) < ChangeOfDirectionDistance;
 
@@ -121,6 +129,17 @@ public partial class Worm : CharacterBody2D, IEnemy
         _fsm.Add(new WormStateIdle(_fsm, this));
         _fsm.Add(new WormStatePrePursue(_fsm, this));
         _fsm.Add(new WormStatePursue(_fsm, this));
+        _fsm.Add(new WormStateHit(_fsm, this, 0.5f));
         _fsm.Set<WormStatePatrol>();
     }
+
+    public void Hit()
+    {
+        PlayAnimation(WormAnim.Hit);
+        this.FrameFreeze();
+        this.Stun();
+    }
+
+    public void OnHeatlhDamaged(Action action) =>
+        Health.OnDamaged += action;
 }

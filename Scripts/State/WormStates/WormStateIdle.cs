@@ -2,12 +2,8 @@ using Platformer.Scripts.Entities.Enemies;
 
 namespace Platformer.Scripts.State.WormStates;
 
-public class WormStateIdle : WormState
+public class WormStateIdle(Fsm fsm, Worm worm) : WormState(fsm, worm)
 {
-    public WormStateIdle(Fsm fsm, Worm worm) : base(fsm, worm)
-    {
-    }
-
     public override void Enter()
     {
         Stop(() => Fsm.Set<WormStatePatrol>());
