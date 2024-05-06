@@ -1,3 +1,4 @@
+using DVar.ShootButDontWaste.Animations.AnimationTypes;
 using Platformer.Scripts.Animations;
 using Platformer.Scripts.Entities;
 
@@ -13,7 +14,7 @@ public class PlayerStateJump : PlayerState
     {
         base.Enter();
 
-        Player.PlayAnimation(PlayerAnim.Jump);
+        Player.PlayAnimation(APlayer.Jump);
     }
 
     public override void PhysicsProcess(double delta)

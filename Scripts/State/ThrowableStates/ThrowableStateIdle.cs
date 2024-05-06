@@ -1,3 +1,4 @@
+using DVar.ShootButDontWaste.Constants;
 using Godot;
 using Platformer.Scripts.Constants;
 using Platformer.Scripts.Properties.Interfaces;
@@ -12,7 +13,7 @@ public class ThrowableStateIdle : ThrowableState
 
     public override void PhysicsProcess(double delta)
     {
-        if (Input.IsActionJustReleased(InputBindings.Interact))
+        if (Input.IsActionJustReleased(InputBindings.interact))
         {
             Fsm.Set<ThrowableStatePickup>();
         }

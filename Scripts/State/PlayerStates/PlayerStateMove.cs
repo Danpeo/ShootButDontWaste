@@ -1,3 +1,4 @@
+using DVar.ShootButDontWaste.Animations.AnimationTypes;
 using Godot;
 using Platformer.Scripts.Animations;
 using Platformer.Scripts.Entities;
@@ -14,13 +15,13 @@ public class PlayerStateMove : PlayerState
     {
         base.Enter();
 
-        Player.PlayAnimation(PlayerAnim.Run);
+        Player.PlayAnimation(APlayer.Run);
     }
 
     public override void PhysicsProcess(double delta)
     {
         TrySetJumpState();
-        TryPlayJump(PlayerAnim.Run);
+        TryPlayJump(APlayer.Run);
         TrySetShootState();
 
         Player.Move();

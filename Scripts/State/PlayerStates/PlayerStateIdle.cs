@@ -1,3 +1,5 @@
+using DVar.ShootButDontWaste.Animations.AnimationTypes;
+using DVar.ShootButDontWaste.Constants;
 using Godot;
 using Platformer.Scripts.Animations;
 using Platformer.Scripts.Constants;
@@ -20,7 +22,7 @@ public class PlayerStateIdle : PlayerState
         TrySetJumpState();
         TrySetShootState();
 
-        float direction = Input.GetAxis(InputBindings.MoveLeft, InputBindings.MoveRight);
+        float direction = Input.GetAxis(InputBindings.moveLeft, InputBindings.moveRight);
 
         if (direction != 0)
         {
@@ -30,6 +32,6 @@ public class PlayerStateIdle : PlayerState
         //string animatin = Player.IsHoldingObject() ? PlayerAnimation.Hit : PlayerAnimation.Idle;
        // string animatin = PlayerAnimation.Idle;
 
-        TryPlayJump(PlayerAnim.Idle);
+        TryPlayJump(APlayer.Idle);
     }
 }

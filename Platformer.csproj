@@ -19,4 +19,7 @@
   <ItemGroup>
     <EmbeddedResource Remove="DVar.GodotSharp.Extensions\**" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="DVar.ShootButDontWaste\DVar.ShootButDontWaste.fsproj" />
+  </ItemGroup>
 </Project>

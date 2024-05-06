@@ -1,4 +1,6 @@
 using System;
+using DVar.ShootButDontWaste.Animations;
+using DVar.ShootButDontWaste.Animations.AnimationTypes;
 using Godot;
 using Platformer.Scripts.Animations;
 using Platformer.Scripts.Constants;
@@ -40,11 +42,11 @@ public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable, IHittableE
 
         _animatedSprite.AnimationFinished += () =>
         {
-            if (_animatedSprite.Animation == MushroomAnimation.Value(MushroomAnim.Squash))
+            if (_animatedSprite.Animation == Anim.mushroom(AMushroom.Squash))
             {
                 QueueFree();
             }
-            else if (_animatedSprite.Animation == MushroomAnimation.Value(MushroomAnim.Showup))
+            else if (_animatedSprite.Animation == Anim.mushroom(AMushroom.Showup))
             {
                 _shoot = true;
             }
@@ -84,34 +86,37 @@ public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable, IHittableE
     public void Showup()
     {
         SetCollisionDisabled(false);
-        PlayAnimation(MushroomAnim.Showup);
+        PlayAnimation(AMushroom.Showup);
     }
 
     private void Shoot()
     {
-        PlayAnimation(MushroomAnim.Shoot);
+        PlayAnimation(AMushroom.Shoot);
         _canShoot.Shoot(Rotation, int.MaxValue);
     }
 
     public void Idle()
     {
-        if (_animatedSprite.Animation == MushroomAnimation.Value(MushroomAnim.Shoot) ||
-            _animatedSprite.Animation == MushroomAnimation.Value(MushroomAnim.Showup))
+        if (_animatedSprite.Animation == Anim.mushroom(AMushroom.Shoot) ||
+            _animatedSprite.Animation == Anim.mushroom(AMushroom.Showup))
         {
-            PlayAnimation(MushroomAnim.Hide);
+            PlayAnimation(AMushroom.Hide);
         }
 
-        PlayAnimation(MushroomAnim.Idle);
+        PlayAnimation(AMushroom.Idle);
         _shoot = false;
     }
 
-    private void PlayAnimation(MushroomAnim animation) =>
-        _animatedSprite.Play(MushroomAnimation.Value(animation));
+    /*private void PlayAnimation(MushroomAnim animation) =>
+        _animatedSprite.Play(MushroomAnimation.Value(animation));*/
+
+    private void PlayAnimation(AMushroom animation) =>
+        _animatedSprite.Play(Anim.mushroom(animation));
 
     public void Hit()
     {
         SetCollisionDisabled(true);
-        PlayAnimation(MushroomAnim.Hit);
+        PlayAnimation(AMushroom.Hit);
         FrameFreeze();
         this.Stun();
     }
@@ -124,7 +129,7 @@ public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable, IHittableE
 
         this.Stun();
 
-        PlayAnimation(MushroomAnim.Squash);
+        PlayAnimation(AMushroom.Squash);
     }
 
     private void FrameFreeze()

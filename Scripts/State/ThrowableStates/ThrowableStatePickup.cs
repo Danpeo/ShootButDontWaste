@@ -1,3 +1,4 @@
+using DVar.ShootButDontWaste.Constants;
 using Godot;
 using Platformer.Scripts.Constants;
 using Platformer.Scripts.Properties.Interfaces;
@@ -23,12 +24,12 @@ public class ThrowableStatePickup : ThrowableState
             Fsm.Set<ThrowableStateIdle>();
         }
 
-        if (Throwable.IsHeld && Input.IsActionJustPressed(InputBindings.Throw))
+        if (Throwable.IsHeld && Input.IsActionJustPressed(InputBindings.@throw))
         {
             Fsm.Set<ThrowableStateThrow>();
         }
 
-        if (Throwable.IsHeld && Input.IsActionJustReleased(InputBindings.Interact))
+        if (Throwable.IsHeld && Input.IsActionJustReleased(InputBindings.interact))
         {
             Fsm.Set<ThrowableStateDrop>();
         }

@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "V+YuUdf2PmW90xcgRiUVFdMh3m+qKgijtWBJE6BmZK7eqnLSiJqizjE00Rhr8Z9W5I5MukOJJvaIb1gXLXHkZQ==",
+  "success": true,
+  "projectFilePath": "D:\\godotgames\\platformer\\DVar.ShootButDontWaste\\DVar.ShootButDontWaste.fsproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\danil\\.nuget\\packages\\fsharp.core\\8.0.200\\fsharp.core.8.0.200.nupkg.sha512"
+  ],
+  "logs": []
+}

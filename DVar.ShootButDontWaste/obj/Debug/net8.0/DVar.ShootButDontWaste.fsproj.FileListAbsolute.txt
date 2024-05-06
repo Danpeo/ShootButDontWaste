@@ -1,0 +1,14 @@
+D:\godotgames\platformer\DVar.ShootButDontWaste\bin\Debug\net8.0\DVar.ShootButDontWaste.deps.json
+D:\godotgames\platformer\DVar.ShootButDontWaste\bin\Debug\net8.0\DVar.ShootButDontWaste.dll
+D:\godotgames\platformer\DVar.ShootButDontWaste\bin\Debug\net8.0\DVar.ShootButDontWaste.pdb
+D:\godotgames\platformer\DVar.ShootButDontWaste\bin\Debug\net8.0\DVar.ShootButDontWaste.xml
+D:\godotgames\platformer\DVar.ShootButDontWaste\obj\Debug\net8.0\DVar.ShootButDontWaste.fsproj.AssemblyReference.cache
+D:\godotgames\platformer\DVar.ShootButDontWaste\obj\Debug\net8.0\DVar.ShootButDontWaste.AssemblyInfoInputs.cache
+D:\godotgames\platformer\DVar.ShootButDontWaste\obj\Debug\net8.0\DVar.ShootButDontWaste.AssemblyInfo.fs
+D:\godotgames\platformer\DVar.ShootButDontWaste\obj\Debug\net8.0\DVar.ShootButDontWaste.fsproj.CoreCompileInputs.cache
+D:\godotgames\platformer\DVar.ShootButDontWaste\obj\Debug\net8.0\DVar.ShootButDontWaste.sourcelink.json
+D:\godotgames\platformer\DVar.ShootButDontWaste\obj\Debug\net8.0\DVar.ShootButDontWaste.dll
+D:\godotgames\platformer\DVar.ShootButDontWaste\obj\Debug\net8.0\refint\DVar.ShootButDontWaste.dll
+D:\godotgames\platformer\DVar.ShootButDontWaste\obj\Debug\net8.0\DVar.ShootButDontWaste.xml
+D:\godotgames\platformer\DVar.ShootButDontWaste\obj\Debug\net8.0\DVar.ShootButDontWaste.pdb
+D:\godotgames\platformer\DVar.ShootButDontWaste\obj\Debug\net8.0\ref\DVar.ShootButDontWaste.dll

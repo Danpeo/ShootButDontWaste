@@ -1,4 +1,9 @@
 using System;
+using System.Resources;
+using DVar.ShootButDontWaste;
+using DVar.ShootButDontWaste.Animations;
+using DVar.ShootButDontWaste.Animations.AnimationTypes;
+using DVar.ShootButDontWaste.Constants;
 using Godot;
 using Platformer.Scripts.Animations;
 using Platformer.Scripts.Constants;
@@ -76,7 +81,7 @@ public partial class Player : CharacterBody2D
         CurrentThrowableObject != null;
 
     public void Move() =>
-        Direction = Input.GetAxis(InputBindings.MoveLeft, InputBindings.MoveRight);
+        Direction = Input.GetAxis(InputBindings.moveLeft, InputBindings.moveRight);
 
     public void Jump() =>
         Velocity = Velocity with { Y = JumpSpeed };
@@ -84,15 +89,21 @@ public partial class Player : CharacterBody2D
     public void Shoot() =>
         _canShoot.Shoot(Rotation, Ammo.Current);
 
-    public void PlayAnimation(PlayerAnim animation)
+    /*public void PlayAnimation(PlayerAnim animation)
     {
         SetSpriteFrames();
         _playerAnimator.Play(PlayerAnimation.Value(animation));
+    }*/
+
+    public void PlayAnimation(APlayer animation)
+    {
+        SetSpriteFrames();
+        _playerAnimator.Play(Anim.player(animation));
     }
 
     public void Hit(float frameFreezeDuration)
     {
-        PlayAnimation(PlayerAnim.Hit);
+        PlayAnimation(APlayer.Hit);
         const float frameFreezeDurationMultiplier = 1.5f;
         const float frameFreezeTiemScale = 0.05f;
         this.Autoload<FrameFreeze>("FrameFreeze")

@@ -1,3 +1,5 @@
+using DVar.ShootButDontWaste.Animations.AnimationTypes;
+using DVar.ShootButDontWaste.Constants;
 using Godot;
 using Platformer.Scripts.Animations;
 using Platformer.Scripts.Constants;
@@ -24,20 +26,20 @@ public class PlayerState : FsmState
     {
     }
 
-    protected void TryPlayJump(PlayerAnim stateAnimation)
+    protected void TryPlayJump(APlayer stateAnimation)
     {
-        Player.PlayAnimation(Player.Velocity.Y < 0 ? PlayerAnim.Jump : stateAnimation);
+        Player.PlayAnimation(Player.Velocity.Y < 0 ? APlayer.Jump : stateAnimation);
     }
 
     protected void TrySetJumpState()
     {
-        if (InputExt.IsActionHolding(InputBindings.Jump) && Player.IsOnFloor())
+        if (InputExt.IsActionHolding(InputBindings.jump) && Player.IsOnFloor())
             Fsm.Set<PlayerStateJump>();
     }
     
     protected void TrySetShootState()
     {
-        if (InputExt.IsActionHolding(InputBindings.Shoot))
+        if (InputExt.IsActionHolding(InputBindings.shoot))
             Fsm.Set<PlayerStateShoot>();
     }
 

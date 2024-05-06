@@ -2,6 +2,8 @@
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Platformer", "Platformer.csproj", "{D02CA600-1731-4D25-81D1-3FC0C2904F11}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "DVar.ShootButDontWaste", "DVar.ShootButDontWaste\DVar.ShootButDontWaste.fsproj", "{4413232F-91BE-4C03-A46F-D0C56EB0D386}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 	Debug|Any CPU = Debug|Any CPU
@@ -15,5 +17,11 @@ Global
 		{D02CA600-1731-4D25-81D1-3FC0C2904F11}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
 		{D02CA600-1731-4D25-81D1-3FC0C2904F11}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
 		{D02CA600-1731-4D25-81D1-3FC0C2904F11}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{4413232F-91BE-4C03-A46F-D0C56EB0D386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4413232F-91BE-4C03-A46F-D0C56EB0D386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4413232F-91BE-4C03-A46F-D0C56EB0D386}.ExportDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4413232F-91BE-4C03-A46F-D0C56EB0D386}.ExportDebug|Any CPU.Build.0 = Debug|Any CPU
+		{4413232F-91BE-4C03-A46F-D0C56EB0D386}.ExportRelease|Any CPU.ActiveCfg = Debug|Any CPU
+		{4413232F-91BE-4C03-A46F-D0C56EB0D386}.ExportRelease|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
