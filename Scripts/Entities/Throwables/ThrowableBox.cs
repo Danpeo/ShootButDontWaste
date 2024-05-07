@@ -4,7 +4,6 @@ using Platformer.Scripts.Properties;
 using Platformer.Scripts.Properties.Interfaces;
 using Platformer.Scripts.State;
 using Platformer.Scripts.State.ThrowableStates;
-using Platformer.Scripts.Utils;
 
 namespace Platformer.Scripts.Entities.Throwables;
 
@@ -38,14 +37,12 @@ public partial class ThrowableBox : CharacterBody2D, IThrowable
         Vector2 currVelocity = Velocity;
         currVelocity.Y += World.GetGravity() * (float)delta;
         Velocity = currVelocity;
-        
+
         var collision = MoveAndCollide(Velocity * (float)delta);
-        if (collision != null)
+        if (collision?.GetCollider() is IEnemy enemy)
         {
-            if (collision.GetCollider() is IEnemy enemy)
-            {
-                EnemyAffect.Damage(enemy, _damage);
-            }
+            EnemyAffect.Damage(enemy, _damage);
+            Velocity = Velocity.Bounce(collision.GetNormal());
         }
 
         if (IsOnFloor())

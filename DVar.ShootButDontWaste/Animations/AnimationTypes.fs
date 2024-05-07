@@ -16,3 +16,11 @@ type APlayer =
   | Run
   | Shoot
   | Jump
+
+[<Struct>]
+type AWorm =
+  | Idle
+  | Attack
+  | Move
+  | AgroMove
+  | Hit

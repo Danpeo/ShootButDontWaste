@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://fwngd5v0ht4k"]
+[gd_scene load_steps=18 format=3 uid="uid://fwngd5v0ht4k"]
 
 [ext_resource type="Texture2D" uid="uid://7lbbt0ltjg6m" path="res://GameAssets/Paper-Pixels-8x8/with-background/Tiles.png" id="1_vn1rn"]
 [ext_resource type="Texture2D" uid="uid://o2ax0nu7eose" path="res://GameAssets/Paper-Pixels-8x8/thorns.png" id="2_y054l"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bd238pqty6uyg" path="res://Scenes/Entities/Enemies/Worm.tscn" id="9_egqbq"]
 [ext_resource type="PackedScene" uid="uid://ck4o4utwdiaun" path="res://Scenes/Throwables/ThrowableBox.tscn" id="10_3df8g"]
 [ext_resource type="PackedScene" uid="uid://ch2wyc5c786ma" path="res://Scenes/Entities/Enemies/Mushroom.tscn" id="11_4is72"]
+[ext_resource type="PackedScene" uid="uid://bqdsg7aoo1mvc" path="res://Scenes/Entities/Platform/PlainPlatform.tscn" id="12_qajln"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f3aki"]
 
@@ -4435,3 +4436,6 @@ position = Vector2(-32, 124)
 
 [node name="Mushroom" parent="." instance=ExtResource("11_4is72")]
 position = Vector2(0, 132)
+
+[node name="PlainPlatform" parent="." instance=ExtResource("12_qajln")]
+position = Vector2(16, 120)

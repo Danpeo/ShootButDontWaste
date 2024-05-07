@@ -1,12 +1,8 @@
 using System;
-using System.Resources;
-using DVar.ShootButDontWaste;
 using DVar.ShootButDontWaste.Animations;
 using DVar.ShootButDontWaste.Animations.AnimationTypes;
 using DVar.ShootButDontWaste.Constants;
 using Godot;
-using Platformer.Scripts.Animations;
-using Platformer.Scripts.Constants;
 using Platformer.Scripts.Effects;
 using Platformer.Scripts.Properties;
 using Platformer.Scripts.Properties.Interfaces;
@@ -45,7 +41,6 @@ public partial class Player : CharacterBody2D
         _orientedToDirection = GetNode<OrientedToDirection>("OrientedToDirection");
 
         _playerAnimator = GetNode<AnimatedSprite2D>("%PlayerAnimatedSprite");
-        //_playerAnimatorUnarmed = GetNode<AnimatedSprite2D>("PlayerAnimatedSpriteUnarmed");
         Ammo = GetNode<Ammo>("%PlayerAmmo");
         Ammo.OnAmmoLessThanZero += die;
         _canShoot = GetNode<CanShoot>("%PlayerCanShoot");
@@ -74,6 +69,21 @@ public partial class Player : CharacterBody2D
         _fsm.PhysicsProcess(delta);
     }
 
+    public override void _Input(InputEvent @event)
+    {
+        goDown();
+
+        void goDown()
+        {
+            if (InputExt.IsActionHolding(InputBindings.down) && IsOnFloor())
+            {
+                Vector2 newPos = Position;
+                newPos.Y += 1f;
+                Position = newPos;
+            }
+        }
+    }
+
     public void OnAmmoReducedByDamage(Action action) =>
         Ammo.OnReducedByDamage += action;
 
@@ -88,13 +98,7 @@ public partial class Player : CharacterBody2D
 
     public void Shoot() =>
         _canShoot.Shoot(Rotation, Ammo.Current);
-
-    /*public void PlayAnimation(PlayerAnim animation)
-    {
-        SetSpriteFrames();
-        _playerAnimator.Play(PlayerAnimation.Value(animation));
-    }*/
-
+    
     public void PlayAnimation(APlayer animation)
     {
         SetSpriteFrames();

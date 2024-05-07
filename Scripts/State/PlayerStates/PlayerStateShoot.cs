@@ -1,7 +1,5 @@
 using DVar.ShootButDontWaste.Animations.AnimationTypes;
 using DVar.ShootButDontWaste.Constants;
-using Platformer.Scripts.Animations;
-using Platformer.Scripts.Constants;
 using Platformer.Scripts.Entities;
 using Platformer.Scripts.Utils;
 

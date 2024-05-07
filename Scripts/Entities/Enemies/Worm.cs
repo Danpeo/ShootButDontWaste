@@ -1,6 +1,7 @@
 using System;
+using DVar.ShootButDontWaste.Animations;
+using DVar.ShootButDontWaste.Animations.AnimationTypes;
 using Godot;
-using Platformer.Scripts.Animations;
 using Platformer.Scripts.Effects;
 using Platformer.Scripts.Entities.Areas;
 using Platformer.Scripts.Properties;
@@ -59,7 +60,7 @@ public partial class Worm : CharacterBody2D, IEnemy, IHittableEnemy
     public void Patrol()
     {
         _currentTargetPosition = _movingToPatrolPoint ? _targetPatrolPointPosition : _startingPosition;
-        PlayAnimation(WormAnim.Move);
+        PlayAnimation(AWorm.Move);
 
         MoveToTarget(_currentTargetPosition);
     }
@@ -67,16 +68,16 @@ public partial class Worm : CharacterBody2D, IEnemy, IHittableEnemy
     public void PursuePlayer()
     {
         _currentTargetPosition = _spotArea.Player!.Position;
-        PlayAnimation(WormAnim.AgroMove);
+        PlayAnimation(AWorm.AgroMove);
         MoveToTarget(_currentTargetPosition);
     }
 
     public bool IsPlayerInSpotArea() =>
         _spotArea.Player != null;
 
-    public void PlayAnimation(WormAnim animation)
+    public void PlayAnimation(AWorm animation)
     {
-        _animatedSprite.Play(WormAnimation.Value(animation));
+        _animatedSprite.Play(Anim.worm(animation));
     }
 
     private void MoveToTarget(Vector2 target)
@@ -88,7 +89,7 @@ public partial class Worm : CharacterBody2D, IEnemy, IHittableEnemy
     public void Stop()
     {
         Velocity = Vector2.Zero;
-        PlayAnimation(WormAnim.Idle);
+        PlayAnimation(AWorm.Idle);
     }
 
     public void OnSpottedPlayer(Action action)
@@ -135,7 +136,7 @@ public partial class Worm : CharacterBody2D, IEnemy, IHittableEnemy
 
     public void Hit()
     {
-        PlayAnimation(WormAnim.Hit);
+        PlayAnimation(AWorm.Hit);
         this.FrameFreeze();
         this.Stun();
     }

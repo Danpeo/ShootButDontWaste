@@ -1,5 +1,4 @@
 using DVar.ShootButDontWaste.Animations.AnimationTypes;
-using Platformer.Scripts.Animations;
 using Platformer.Scripts.Entities;
 
 namespace Platformer.Scripts.State.PlayerStates;

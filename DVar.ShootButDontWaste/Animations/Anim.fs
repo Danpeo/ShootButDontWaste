@@ -18,3 +18,11 @@ let player (animation: APlayer) =
   | APlayer.Run -> "Run"
   | APlayer.Shoot -> "Shoot"
   | APlayer.Jump -> "Jump"
+
+let worm (animation: AWorm) =
+  match animation with
+  | AWorm.Idle -> "Idle"
+  | AWorm.Attack -> "Attack"
+  | AWorm.Move -> "Move"
+  | AWorm.AgroMove -> "AgroMove"
+  | AWorm.Hit -> "Hit"

@@ -1,8 +1,6 @@
 using DVar.ShootButDontWaste.Animations.AnimationTypes;
 using DVar.ShootButDontWaste.Constants;
 using Godot;
-using Platformer.Scripts.Animations;
-using Platformer.Scripts.Constants;
 using Platformer.Scripts.Entities;
 
 namespace Platformer.Scripts.State.PlayerStates;

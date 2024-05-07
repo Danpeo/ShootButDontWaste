@@ -2,7 +2,6 @@ using System;
 using DVar.ShootButDontWaste.Animations;
 using DVar.ShootButDontWaste.Animations.AnimationTypes;
 using Godot;
-using Platformer.Scripts.Animations;
 using Platformer.Scripts.Constants;
 using Platformer.Scripts.Effects;
 using Platformer.Scripts.Entities.Areas;
