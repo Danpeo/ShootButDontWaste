@@ -10,8 +10,7 @@ public partial class MushroomBullet : BaseBullet
     {
         if (collision != null)
         {
-            QueueFree();
-
+            Destroy();
             if (collision.GetCollider() is Player player)
             {
                 PlayerAffect.Damage(player, Damage);
@@ -19,5 +18,5 @@ public partial class MushroomBullet : BaseBullet
         }
     }
 
-    private void OnVisibilityNotifier2DScreenExited() => QueueFree();
+    private void OnVisibilityNotifier2DScreenExited() => Destroy();
 }

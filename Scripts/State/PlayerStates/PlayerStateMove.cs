@@ -24,7 +24,7 @@ public class PlayerStateMove : PlayerState
 
         Player.Move();
 
-        if (Player.Direction == 0)
+        if (Player.DirectionX == 0)
         {
             Fsm.Set<PlayerStateIdle>();
         }

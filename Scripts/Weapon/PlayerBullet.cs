@@ -10,14 +10,13 @@ public partial class PlayerBullet : BaseBullet
     {
         if (collision != null)
         {
-            QueueFree();
-
+            Destroy();
             if (collision.GetCollider() is IEnemy enemy)
             {
                 EnemyAffect.Damage(enemy, Damage);
             }
         }
     }
-    
-    private void OnVisibilityNotifier2DScreenExited() => QueueFree();
+
+    private void OnVisibilityNotifier2DScreenExited() => Destroy();
 }

@@ -22,6 +22,6 @@ public class PlayerStateHit : PlayerState
     public override void Exit()
     {
         _hitTimer.Stop();
-        Player.Direction = 0;
+        Player.DirectionX = 0;
     }
 }

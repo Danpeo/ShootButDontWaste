@@ -3,6 +3,8 @@ using DVar.ShootButDontWaste.Animations;
 using DVar.ShootButDontWaste.Animations.AnimationTypes;
 using DVar.ShootButDontWaste.Constants;
 using Godot;
+using Platformer.Scripts.Constants;
+using Platformer.Scripts.Constants.Sounds;
 using Platformer.Scripts.Effects;
 using Platformer.Scripts.Properties;
 using Platformer.Scripts.Properties.Interfaces;
@@ -31,7 +33,10 @@ public partial class Player : CharacterBody2D
     private SpriteFrames _unarmedSpriteFrames =
         GD.Load<SpriteFrames>("res://Scenes/Animators/UnarmedPlayerSpriteFrames.tres");
 
-    public float Direction { get; internal set; }
+    private AudioStreamPlayer2D _sfxPlayer = null!;
+
+    public float DirectionX { get; internal set; }
+    public float DirectionY { get; internal set; }
     private CanShoot _canShoot = null!;
     private OrientedToDirection _orientedToDirection = null!;
     private Fsm _fsm = null!;
@@ -39,7 +44,7 @@ public partial class Player : CharacterBody2D
     public override void _Ready()
     {
         _orientedToDirection = GetNode<OrientedToDirection>("OrientedToDirection");
-
+        _sfxPlayer = GetNode<AudioStreamPlayer2D>("SFXStreamPlayer2D");
         _playerAnimator = GetNode<AnimatedSprite2D>("%PlayerAnimatedSprite");
         Ammo = GetNode<Ammo>("%PlayerAmmo");
         Ammo.OnAmmoLessThanZero += die;
@@ -59,8 +64,10 @@ public partial class Player : CharacterBody2D
         Debug.Print(Ammo.Current + "AMMO");
         */
         Vector2 currVelocity = Velocity;
+
         currVelocity.Y += World.GetGravity() * (float)delta;
-        currVelocity.X = Direction * Speed;
+
+        currVelocity.X = DirectionX * Speed;
         Velocity = currVelocity;
 
         MoveAndSlide();
@@ -75,7 +82,8 @@ public partial class Player : CharacterBody2D
 
         void goDown()
         {
-            if (InputExt.IsActionHolding(InputBindings.down) && IsOnFloor())
+            if (InputExt.IsActionHolding(InputBindings.interact) && Input.IsActionPressed(InputBindings.down) &&
+                IsOnFloor())
             {
                 Vector2 newPos = Position;
                 newPos.Y += 1f;
@@ -91,22 +99,43 @@ public partial class Player : CharacterBody2D
         CurrentThrowableObject != null;
 
     public void Move() =>
-        Direction = Input.GetAxis(InputBindings.moveLeft, InputBindings.moveRight);
+        DirectionX = Input.GetAxis(InputBindings.moveLeft, InputBindings.moveRight);
 
-    public void Jump() =>
+    public void Jump()
+    {
+        PlayAudio(PlayerSounds.Jump);
+        
         Velocity = Velocity with { Y = JumpSpeed };
+    }
 
-    public void Shoot() =>
+    /*public void GoUp()
+    {
+        _isUsingLadder = true;
+    }
+
+    public void GoDown()
+    {
+        _isUsingLadder = false;
+    }*/
+
+    public void Shoot() => 
         _canShoot.Shoot(Rotation, Ammo.Current);
-    
+
     public void PlayAnimation(APlayer animation)
     {
         SetSpriteFrames();
         _playerAnimator.Play(Anim.player(animation));
     }
 
+    public void PlayAudio(AudioStream audioStream)
+    {
+        _sfxPlayer.Stream = audioStream;
+        _sfxPlayer.Play();
+    }
+
     public void Hit(float frameFreezeDuration)
     {
+        PlayAudio(PlayerSounds.Hit);
         PlayAnimation(APlayer.Hit);
         const float frameFreezeDurationMultiplier = 1.5f;
         const float frameFreezeTiemScale = 0.05f;
@@ -115,14 +144,14 @@ public partial class Player : CharacterBody2D
 
         bool flippedDirection = _orientedToDirection.FlipOrientation;
 
-        Direction = flippedDirection switch
+        DirectionX = flippedDirection switch
         {
-            true when Direction == 0 => 1,
-            false when Direction == 0 => -1,
-            _ => -Direction
+            true when DirectionX == 0 => 1,
+            false when DirectionX == 0 => -1,
+            _ => -DirectionX
         };
 
-        Velocity = new Vector2(Direction * _stunDistanceX, _stunDistanceY);
+        Velocity = new Vector2(DirectionX * _stunDistanceX, _stunDistanceY);
     }
 
     private void AddStates()

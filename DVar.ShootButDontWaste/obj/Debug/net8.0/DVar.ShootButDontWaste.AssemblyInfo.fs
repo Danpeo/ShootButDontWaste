@@ -10,7 +10,7 @@ open System.Reflection
 [<assembly: System.Reflection.AssemblyCompanyAttribute("DVar.ShootButDontWaste")>]
 [<assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")>]
 [<assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")>]
-[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ef171c388e7c6fcfebcf52863e201777c2de2bd")>]
+[<assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+09e27649ffde1bde51f3135df7ad2a45ac12071c")>]
 [<assembly: System.Reflection.AssemblyProductAttribute("DVar.ShootButDontWaste")>]
 [<assembly: System.Reflection.AssemblyTitleAttribute("DVar.ShootButDontWaste")>]
 [<assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")>]

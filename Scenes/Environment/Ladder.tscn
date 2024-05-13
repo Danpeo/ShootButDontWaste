@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://iiwngrh2x53g"]
+
+[ext_resource type="Script" path="res://Scripts/Environment/Ladder.cs" id="1_to7ek"]
+[ext_resource type="Texture2D" uid="uid://b6l2og7cj8lac" path="res://GameAssets/Paper-Pixels-8x8/CutTiles/sprite_0140_LADDER_1.png" id="2_1s1gj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhw2v"]
+size = Vector2(6, 11)
+
+[node name="Ladder" type="Area2D"]
+script = ExtResource("1_to7ek")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_bhw2v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1s1gj")

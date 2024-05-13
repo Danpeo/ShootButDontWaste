@@ -55,6 +55,7 @@ public partial class ThrowableBox : CharacterBody2D, IThrowable
             Player player = _pickableArea.I.Player!;
             Position = player.Position +
                        player.Transform.X * _holdingOffset;
+            Velocity = Vector2.Zero;
             _direction = player.Scale.Y;
             player.CurrentThrowableObject = this;
         }

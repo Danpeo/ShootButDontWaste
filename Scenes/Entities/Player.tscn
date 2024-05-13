@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://caiipt70dcaui"]
+[gd_scene load_steps=22 format=3 uid="uid://caiipt70dcaui"]
 
 [ext_resource type="Script" path="res://Scripts/Entities/Player.cs" id="1_dqshf"]
 [ext_resource type="PackedScene" uid="uid://bpr334qcbkpmv" path="res://Scenes/Animators/PlayerAnimatedSprite.tscn" id="4_0x5pd"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://cuq5dbs4s03r8" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun6.png" id="11_kktja"]
 [ext_resource type="Texture2D" uid="uid://cfgw6v6jmwq5b" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun7.png" id="12_0ganw"]
 [ext_resource type="Texture2D" uid="uid://bu1cwjckon2r1" path="res://GameAssets/Paper-Pixels-8x8/player/unarmed/run/UnarmedRun8.png" id="13_yr84d"]
+[ext_resource type="AudioStream" uid="uid://bpugd28rt1mvu" path="res://GameAssets/Audio/SFX/PlayerJump.wav" id="19_8yuox"]
 [ext_resource type="PackedScene" uid="uid://bl77r6l1d24rk" path="res://Scenes/Properties/Ammo.tscn" id="19_d6fbc"]
 [ext_resource type="PackedScene" uid="uid://blpuiro8pnb6p" path="res://Scenes/Entities/CanShoot.tscn" id="20_kqwes"]
 
@@ -72,6 +73,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 15
 script = ExtResource("1_dqshf")
 Speed = 100.0
 
@@ -103,3 +105,7 @@ unique_name_in_owner = true
 visible = false
 sprite_frames = SubResource("SpriteFrames_0pd7a")
 animation = &"Idle"
+
+[node name="SFXStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("19_8yuox")
+bus = &"SFX"
