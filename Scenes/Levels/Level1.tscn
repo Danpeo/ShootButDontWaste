@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://fwngd5v0ht4k"]
+[gd_scene load_steps=20 format=3 uid="uid://fwngd5v0ht4k"]
 
 [ext_resource type="Texture2D" uid="uid://7lbbt0ltjg6m" path="res://GameAssets/Paper-Pixels-8x8/with-background/Tiles.png" id="1_vn1rn"]
 [ext_resource type="Texture2D" uid="uid://o2ax0nu7eose" path="res://GameAssets/Paper-Pixels-8x8/thorns.png" id="2_y054l"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://ch2wyc5c786ma" path="res://Scenes/Entities/Enemies/Mushroom.tscn" id="11_4is72"]
 [ext_resource type="PackedScene" uid="uid://bqdsg7aoo1mvc" path="res://Scenes/Entities/Platform/PlainPlatform.tscn" id="12_qajln"]
 [ext_resource type="PackedScene" uid="uid://cg55b2h7w1s8c" path="res://Scenes/Entities/Platform/MovingPlatform.tscn" id="13_eqcn1"]
+[ext_resource type="AudioStream" uid="uid://co3ursa15e52m" path="res://GameAssets/Audio/Music/Town.ogg" id="14_ieg43"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_f3aki"]
 
@@ -4429,9 +4430,6 @@ position = Vector2(68, 133)
 [node name="SingleCollectBullet 3" parent="." instance=ExtResource("8_nqc7w")]
 position = Vector2(73, 133)
 
-[node name="Worm" parent="." instance=ExtResource("9_egqbq")]
-position = Vector2(51, 132)
-
 [node name="ThrowableBox" parent="." instance=ExtResource("10_3df8g")]
 position = Vector2(-32, 124)
 
@@ -4443,3 +4441,11 @@ position = Vector2(16, 120)
 
 [node name="MovingPlatform" parent="." instance=ExtResource("13_eqcn1")]
 position = Vector2(91, 121)
+
+[node name="Worm" parent="." instance=ExtResource("9_egqbq")]
+position = Vector2(83, 131)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_ieg43")
+autoplay = true
+bus = &"Music"

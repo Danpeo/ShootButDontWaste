@@ -48,6 +48,7 @@ public partial class Player : CharacterBody2D
         _playerAnimator = GetNode<AnimatedSprite2D>("%PlayerAnimatedSprite");
         Ammo = GetNode<Ammo>("%PlayerAmmo");
         Ammo.OnAmmoLessThanZero += die;
+        Ammo.OnAdd += () => _sfxPlayer.PlayAudio(CommonSounds.Coin);
         _canShoot = GetNode<CanShoot>("%PlayerCanShoot");
         _canShoot.OnShooted += shots => Ammo.ReduceByShooting(shots);
         AddStates();
@@ -103,22 +104,12 @@ public partial class Player : CharacterBody2D
 
     public void Jump()
     {
-        PlayAudio(PlayerSounds.Jump);
-        
+        _sfxPlayer.PlayAudio(PlayerSounds.Jump);
+
         Velocity = Velocity with { Y = JumpSpeed };
     }
 
-    /*public void GoUp()
-    {
-        _isUsingLadder = true;
-    }
-
-    public void GoDown()
-    {
-        _isUsingLadder = false;
-    }*/
-
-    public void Shoot() => 
+    public void Shoot() =>
         _canShoot.Shoot(Rotation, Ammo.Current);
 
     public void PlayAnimation(APlayer animation)
@@ -127,15 +118,9 @@ public partial class Player : CharacterBody2D
         _playerAnimator.Play(Anim.player(animation));
     }
 
-    public void PlayAudio(AudioStream audioStream)
-    {
-        _sfxPlayer.Stream = audioStream;
-        _sfxPlayer.Play();
-    }
-
     public void Hit(float frameFreezeDuration)
     {
-        PlayAudio(PlayerSounds.Hit);
+        _sfxPlayer.PlayAudio(PlayerSounds.Hit);
         PlayAnimation(APlayer.Hit);
         const float frameFreezeDurationMultiplier = 1.5f;
         const float frameFreezeTiemScale = 0.05f;
@@ -182,8 +167,6 @@ public partial class Player : CharacterBody2D
         }
     }
 
-    private void SetSpriteFrames()
-    {
+    private void SetSpriteFrames() =>
         _playerAnimator.SpriteFrames = IsHoldingObject() ? _unarmedSpriteFrames : _armedSpriteFrames;
-    }
 }

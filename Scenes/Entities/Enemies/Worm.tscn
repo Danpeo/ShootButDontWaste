@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bd238pqty6uyg"]
+[gd_scene load_steps=26 format=3 uid="uid://bd238pqty6uyg"]
 
 [ext_resource type="Texture2D" uid="uid://befssixko7kms" path="res://GameAssets/Paper-Pixels-8x8/enemies/worm/enemies075.png" id="1_35h2c"]
 [ext_resource type="Script" path="res://Scripts/Entities/Enemies/Worm.cs" id="1_d06bc"]
@@ -11,8 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://7727l7iao5xk" path="res://GameAssets/Paper-Pixels-8x8/enemies/worm/enemies070.png" id="5_gwcbi"]
 [ext_resource type="Texture2D" uid="uid://m7j6ll5i8o47" path="res://GameAssets/Paper-Pixels-8x8/enemies/worm/enemies071.png" id="6_e7ku5"]
 [ext_resource type="Texture2D" uid="uid://da2w4f5bxsloi" path="res://GameAssets/Paper-Pixels-8x8/enemies/worm/enemies072.png" id="7_36in1"]
+[ext_resource type="Texture2D" uid="uid://480rrdk580g5" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies085.png" id="8_dtxg7"]
 [ext_resource type="Texture2D" uid="uid://7fhl63ix2q68" path="res://GameAssets/Paper-Pixels-8x8/enemies/worm/enemies073.png" id="8_vmw3g"]
 [ext_resource type="Texture2D" uid="uid://dttf0ixh4hh4u" path="res://GameAssets/Paper-Pixels-8x8/enemies/worm/enemies074.png" id="9_ned4h"]
+[ext_resource type="Texture2D" uid="uid://cblrp7q5e3i6n" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies084.png" id="9_y5mtv"]
+[ext_resource type="Texture2D" uid="uid://d3hnkbmycg0pm" path="res://GameAssets/Paper-Pixels-8x8/enemies/enemies086.png" id="10_la4hg"]
 [ext_resource type="PackedScene" uid="uid://c01ljmhepj50h" path="res://Scenes/Properties/Health.tscn" id="12_bxr7j"]
 [ext_resource type="PackedScene" uid="uid://cqy3hcf8f124" path="res://Scenes/Properties/OrientedToDirection.tscn" id="13_albiy"]
 [ext_resource type="Script" path="res://Scripts/Entities/Areas/SpotArea.cs" id="14_64dul"]
@@ -47,6 +50,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"Attack",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_dtxg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_y5mtv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_la4hg")
+}],
+"loop": false,
+"name": &"Die",
 "speed": 6.0
 }, {
 "frames": [{
@@ -108,11 +125,11 @@ size = Vector2(40, 9)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_d06bc")
-ChangeOfDirectionDistance = 5.0
+PatrolDistance = 20.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_yx7e1")
-animation = &"Hit"
+animation = &"Die"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -144,3 +161,6 @@ shape = SubResource("RectangleShape2D_6fo82")
 position = Vector2(6, -10)
 frame = 0
 frame_progress = 0.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+bus = &"SFX"

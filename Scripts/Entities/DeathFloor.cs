@@ -14,6 +14,10 @@ public partial class DeathFloor : Area2D
                 Ammo playerAmmo = player.Ammo;
                 playerAmmo.Current = -1;
             }
+            else
+            {
+                body.QueueFree();
+            }
         };
     }
 }

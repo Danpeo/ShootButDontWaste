@@ -108,4 +108,4 @@ animation = &"Idle"
 
 [node name="SFXStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("19_8yuox")
-bus = &"SFX"
+bus = &"SFX2"

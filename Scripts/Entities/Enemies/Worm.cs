@@ -2,6 +2,8 @@ using System;
 using DVar.ShootButDontWaste.Animations;
 using DVar.ShootButDontWaste.Animations.AnimationTypes;
 using Godot;
+using Platformer.Scripts.Constants;
+using Platformer.Scripts.Constants.Sounds;
 using Platformer.Scripts.Effects;
 using Platformer.Scripts.Entities.Areas;
 using Platformer.Scripts.Properties;
@@ -34,12 +36,13 @@ public partial class Worm : CharacterBody2D, IEnemy, IHittableEnemy
     private Vector2 _currentTargetPosition;
     private bool _movingToPatrolPoint = true;
     private Fsm _fsm = null!;
+    private AudioStreamPlayer2D _audioPlayer = null!;
 
     public override void _Ready()
     {
         Health = GetNode<Health>("%WormHealth");
-        Health.OnHealthIsZero += QueueFree;
-
+        Health.OnHealthIsZero += Die;
+        _audioPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
         _orientedToDirection = GetNode<OrientedToDirection>("OrientedToDirection");
         _spotArea = GetNode<SpotArea>("SpotArea");
         _animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -52,6 +55,7 @@ public partial class Worm : CharacterBody2D, IEnemy, IHittableEnemy
 
     public override void _PhysicsProcess(double delta)
     {
+        GD.Print(Health.Current);
         this.ApplyGravity(delta);
         MoveAndSlide();
         _fsm.PhysicsProcess(delta);
@@ -61,7 +65,6 @@ public partial class Worm : CharacterBody2D, IEnemy, IHittableEnemy
     {
         _currentTargetPosition = _movingToPatrolPoint ? _targetPatrolPointPosition : _startingPosition;
         PlayAnimation(AWorm.Move);
-
         MoveToTarget(_currentTargetPosition);
     }
 
@@ -112,9 +115,7 @@ public partial class Worm : CharacterBody2D, IEnemy, IHittableEnemy
 
     private void GetStunned()
     {
-        const float stunX = 40f;
-        const float stunY = -180f;
-        this.Stun(stunX, stunY);
+        this.Stun();
     }
 
     public bool IsAlmostAtCurrentTargetPosition() =>
@@ -134,9 +135,26 @@ public partial class Worm : CharacterBody2D, IEnemy, IHittableEnemy
         _fsm.Set<WormStatePatrol>();
     }
 
+    public void Die()
+    {
+        _audioPlayer.PlayAudio(CommonSounds.Bubble);
+        SetCollisionDisabled(true);
+        this.FrameFreeze();
+        this.Stun();
+        PlayAnimation(AWorm.Die);
+        QueueFree();
+    }
+
+    private void SetCollisionDisabled(bool disabled)
+    {
+        GetNode<CollisionShape2D>(EntityConst.DamageAreaCollisionShape).Disabled = disabled;
+        GetNode<CollisionShape2D>("CollisionShape2D").Disabled = disabled;
+    }
+
     public void Hit()
     {
         PlayAnimation(AWorm.Hit);
+        _audioPlayer.PlayAudio(CommonSounds.Hit);
         this.FrameFreeze();
         this.Stun();
     }

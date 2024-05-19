@@ -10,6 +10,7 @@ public partial class PlayerBullet : BaseBullet
     {
         if (collision != null)
         {
+            Collided = true;
             Destroy();
             if (collision.GetCollider() is IEnemy enemy)
             {

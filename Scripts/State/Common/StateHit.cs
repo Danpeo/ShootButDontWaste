@@ -25,5 +25,4 @@ public class StateHit<TEntity, TSetStateAfterTimeOut> : FsmState
     {
         _hitTimer.Stop();
     }
-
 }

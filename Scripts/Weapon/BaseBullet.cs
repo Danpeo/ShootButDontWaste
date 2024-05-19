@@ -10,6 +10,7 @@ public abstract partial class BaseBullet : CharacterBody2D, IShootable
     [Export] public int BulletCountAsOneShot { get; set; } = 1;
 
     protected AudioStreamPlayer2D Sfx = null!;
+    protected bool Collided;
 
     public void Construct(Vector2 position, float rotation)
     {
@@ -25,8 +26,11 @@ public abstract partial class BaseBullet : CharacterBody2D, IShootable
 
     public override void _PhysicsProcess(double delta)
     {
-        KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
-        ProcessCollision(collision);
+        if (!Collided)
+        {
+            KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
+            ProcessCollision(collision);
+        }
     }
 
     protected void Destroy()
@@ -34,7 +38,6 @@ public abstract partial class BaseBullet : CharacterBody2D, IShootable
         Hide();
         Sfx.Finished += QueueFree;
     }
-    
-    protected abstract void ProcessCollision(KinematicCollision2D? collision);
 
+    protected abstract void ProcessCollision(KinematicCollision2D? collision);
 }

@@ -10,6 +10,7 @@ public partial class MushroomBullet : BaseBullet
     {
         if (collision != null)
         {
+            Collided = true;
             Destroy();
             if (collision.GetCollider() is Player player)
             {

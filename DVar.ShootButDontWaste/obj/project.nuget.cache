@@ -1,10 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "V+YuUdf2PmW90xcgRiUVFdMh3m+qKgijtWBJE6BmZK7eqnLSiJqizjE00Rhr8Z9W5I5MukOJJvaIb1gXLXHkZQ==",
+  "dgSpecHash": "VbOKRw/15vANARmRzylRjLwJ/jnhV92u6rMyu66cwTZZ3ZHeBqlDvWN9iojYPLW+Tl22w3m5Egp4WJRP17B5pw==",
   "success": true,
   "projectFilePath": "D:\\godotgames\\platformer\\DVar.ShootButDontWaste\\DVar.ShootButDontWaste.fsproj",
   "expectedPackageFiles": [
-    "C:\\Users\\danil\\.nuget\\packages\\fsharp.core\\8.0.200\\fsharp.core.8.0.200.nupkg.sha512"
+    "C:\\Users\\danil\\.nuget\\packages\\fsharp.core\\8.0.200\\fsharp.core.8.0.200.nupkg.sha512",
+    "C:\\Users\\danil\\.nuget\\packages\\microsoft.dotnet.ilcompiler\\8.0.5\\microsoft.dotnet.ilcompiler.8.0.5.nupkg.sha512",
+    "C:\\Users\\danil\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.5\\microsoft.net.illink.tasks.8.0.5.nupkg.sha512",
+    "C:\\Users\\danil\\.nuget\\packages\\runtime.win-x64.microsoft.dotnet.ilcompiler\\8.0.5\\runtime.win-x64.microsoft.dotnet.ilcompiler.8.0.5.nupkg.sha512"
   ],
   "logs": []
 }

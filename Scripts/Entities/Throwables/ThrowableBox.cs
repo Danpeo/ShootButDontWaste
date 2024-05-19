@@ -1,9 +1,11 @@
 using Godot;
+using Platformer.Scripts.Constants.Sounds;
 using Platformer.Scripts.Entities.Enemies;
 using Platformer.Scripts.Properties;
 using Platformer.Scripts.Properties.Interfaces;
 using Platformer.Scripts.State;
 using Platformer.Scripts.State.ThrowableStates;
+using Platformer.Scripts.Utils;
 
 namespace Platformer.Scripts.Entities.Throwables;
 
@@ -18,13 +20,14 @@ public partial class ThrowableBox : CharacterBody2D, IThrowable
     private Vector2 _originalPosition;
     private float _direction;
     private Fsm _fsm = null!;
-
+    private AudioStreamPlayer2D _audioPlayer = null!;
 
     public override void _Ready()
     {
         _originalPosition = Position;
         _pickableArea = GetNode<InteractArea>("InteractArea");
         _fsm = new Fsm();
+        _audioPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
         _fsm.Add(new ThrowableStateIdle(_fsm, this));
         _fsm.Add(new ThrowableStatePickup(_fsm, this));
         _fsm.Add(new ThrowableStateThrow(_fsm, this));
@@ -41,6 +44,7 @@ public partial class ThrowableBox : CharacterBody2D, IThrowable
         var collision = MoveAndCollide(Velocity * (float)delta);
         if (collision?.GetCollider() is IEnemy enemy)
         {
+            _audioPlayer.PlayAudio(CommonSounds.BlockHit);
             EnemyAffect.Damage(enemy, _damage);
             Velocity = Velocity.Bounce(collision.GetNormal());
         }

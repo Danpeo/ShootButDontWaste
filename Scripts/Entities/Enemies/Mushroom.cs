@@ -3,6 +3,7 @@ using DVar.ShootButDontWaste.Animations;
 using DVar.ShootButDontWaste.Animations.AnimationTypes;
 using Godot;
 using Platformer.Scripts.Constants;
+using Platformer.Scripts.Constants.Sounds;
 using Platformer.Scripts.Effects;
 using Platformer.Scripts.Entities.Areas;
 using Platformer.Scripts.Properties;
@@ -23,12 +24,14 @@ public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable, IHittableE
     private bool _isIdle;
     private bool _shoot;
     private Fsm _fsm = null!;
+    private AudioStreamPlayer2D _audioPlayer = null!;
 
     public override void _Ready()
     {
         Health = GetNode<Health>("Health");
         Health.OnHealthIsZero += GetSquashed;
-
+        _audioPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
+        
         _canShoot = GetNode<CanShoot>("CanShoot");
         _spotArea = GetNode<SpotArea>("SpotArea");
 
@@ -114,7 +117,6 @@ public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable, IHittableE
 
     public void Hit()
     {
-        SetCollisionDisabled(true);
         PlayAnimation(AMushroom.Hit);
         FrameFreeze();
         this.Stun();
@@ -122,6 +124,7 @@ public partial class Mushroom : CharacterBody2D, IEnemy, ISquashable, IHittableE
 
     public void GetSquashed()
     {
+        _audioPlayer.PlayAudio(CommonSounds.Bubble);
         SetCollisionDisabled(true);
 
         FrameFreeze();

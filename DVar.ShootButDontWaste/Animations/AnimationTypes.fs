@@ -24,3 +24,4 @@ type AWorm =
   | Move
   | AgroMove
   | Hit
+  | Die

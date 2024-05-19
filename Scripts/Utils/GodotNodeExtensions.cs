@@ -33,4 +33,10 @@ public static class GodotNodeExtensions
         int direction = RandGen.Boolean() ? -1 : 1;
         characterBody.Velocity = new Vector2(direction * stunDistanceX, stunDistanceY);
     }
+
+    public static void PlayAudio(this AudioStreamPlayer2D player, AudioStream audioStream)
+    {
+        player.Stream = audioStream;
+        player.Play();
+    }
 }

@@ -26,3 +26,4 @@ let worm (animation: AWorm) =
   | AWorm.Move -> "Move"
   | AWorm.AgroMove -> "AgroMove"
   | AWorm.Hit -> "Hit"
+  | AWorm.Die -> "Die"

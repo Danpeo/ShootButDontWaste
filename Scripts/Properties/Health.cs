@@ -10,14 +10,14 @@ public partial class Health : Node
     public int Current
     {
         get => _current;
-        set
+        private set
         {
             _current = value;
 
             if (_current <= 0)
             {
-                OnHealthIsZero?.Invoke();
                 _current = 0;
+                OnHealthIsZero?.Invoke();
             }
 
             if (_current >= Max)
